@@ -1,0 +1,589 @@
+{
+  "version": "1.0",
+  "description": "Construction Intelligence Platform Knowledge Base - Curated Open-Access Document Inventory",
+  "last_updated": "2026-07-17",
+  "domains": [
+    "quality",
+    "concrete",
+    "cracks",
+    "honeycombing",
+    "safety",
+    "boq",
+    "material_management",
+    "cost",
+    "delays",
+    "standards",
+    "inspection",
+    "reports"
+  ],
+  "documents": [
+    {
+      "id": "fhwa_concrete_crack_eval",
+      "title": "Evaluation and Repair of Concrete Structures - Engineering Manual",
+      "source_org": "FHWA / US Army Corps of Engineers",
+      "url": "https://www.publications.usace.army.mil/Portals/76/Publications/EngineerManuals/EM_1110-2-2002.pdf",
+      "alt_url": "https://apps.dtic.mil/sti/pdfs/ADA366734.pdf",
+      "domain": "cracks",
+      "doc_type": "manual",
+      "pub_year": 1995,
+      "relevance_score": 0.98,
+      "priority": "High",
+      "filename": "EM_1110-2-2002_concrete_eval_repair.pdf",
+      "topics": [
+        "crack evaluation",
+        "crack classification",
+        "repair methods",
+        "structural assessment"
+      ]
+    },
+    {
+      "id": "fhwa_concrete_mix_design",
+      "title": "Concrete Mix Design, Quality Control and Specification",
+      "source_org": "FHWA / US DOT",
+      "url": "https://www.fhwa.dot.gov/infrastructure/materialsgrp/concmix.pdf",
+      "domain": "concrete",
+      "doc_type": "report",
+      "pub_year": 2003,
+      "relevance_score": 0.9,
+      "priority": "High",
+      "filename": "fhwa_concrete_mix_design_qc.pdf",
+      "topics": [
+        "mix design",
+        "water cement ratio",
+        "quality control",
+        "slump",
+        "compressive strength"
+      ]
+    },
+    {
+      "id": "nptel_concrete_technology",
+      "title": "NPTEL Lecture Notes - Concrete Technology",
+      "source_org": "NPTEL / IIT Kharagpur",
+      "url": "https://nptel.ac.in/content/storage2/courses/105105104/pdf/m1l5.pdf",
+      "domain": "concrete",
+      "doc_type": "lecture_notes",
+      "pub_year": 2012,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "nptel_concrete_technology_m1l5.pdf",
+      "topics": [
+        "concrete properties",
+        "hydration",
+        "curing",
+        "admixtures",
+        "workability"
+      ]
+    },
+    {
+      "id": "nptel_concrete_mix_design",
+      "title": "NPTEL - Concrete Mix Design Lecture",
+      "source_org": "NPTEL / IIT Delhi",
+      "url": "https://nptel.ac.in/content/storage2/courses/105102011/downloads/lec-13.pdf",
+      "domain": "concrete",
+      "doc_type": "lecture_notes",
+      "pub_year": 2010,
+      "relevance_score": 0.88,
+      "priority": "High",
+      "filename": "nptel_concrete_mix_design_lec13.pdf",
+      "topics": [
+        "IS 10262 mix design",
+        "water cement ratio",
+        "cement content",
+        "trial mix"
+      ]
+    },
+    {
+      "id": "nptel_concrete_repair",
+      "title": "NPTEL - Maintenance and Repair of Concrete Structures (Module 1)",
+      "source_org": "NPTEL / IIT Madras",
+      "url": "https://nptel.ac.in/content/storage2/courses/105106202/pdf/module1.pdf",
+      "domain": "cracks",
+      "doc_type": "lecture_notes",
+      "pub_year": 2015,
+      "relevance_score": 0.97,
+      "priority": "High",
+      "filename": "nptel_maintenance_repair_concrete_m1.pdf",
+      "topics": [
+        "crack causes",
+        "crack classification",
+        "plastic shrinkage",
+        "structural cracks",
+        "inspection"
+      ]
+    },
+    {
+      "id": "nptel_construction_safety",
+      "title": "NPTEL - Construction Safety Management",
+      "source_org": "NPTEL / IIT Roorkee",
+      "url": "https://nptel.ac.in/content/storage2/courses/112107145/pdf/m5l26.pdf",
+      "domain": "safety",
+      "doc_type": "lecture_notes",
+      "pub_year": 2013,
+      "relevance_score": 0.85,
+      "priority": "Medium",
+      "filename": "nptel_construction_safety_m5l26.pdf",
+      "topics": [
+        "site safety",
+        "hazard identification",
+        "PPE",
+        "scaffolding safety",
+        "fall protection"
+      ]
+    },
+    {
+      "id": "nptel_construction_management",
+      "title": "NPTEL - Construction Planning and Management (Module 1)",
+      "source_org": "NPTEL / IIT Kharagpur",
+      "url": "https://nptel.ac.in/content/storage2/courses/105105098/pdf/m1l1.pdf",
+      "domain": "delays",
+      "doc_type": "lecture_notes",
+      "pub_year": 2012,
+      "relevance_score": 0.82,
+      "priority": "Medium",
+      "filename": "nptel_construction_planning_m1l1.pdf",
+      "topics": [
+        "project planning",
+        "schedule delays",
+        "critical path method",
+        "resource management"
+      ]
+    },
+    {
+      "id": "nptel_project_cost",
+      "title": "NPTEL - Cost Estimation and Control in Construction Projects",
+      "source_org": "NPTEL / IIT Madras",
+      "url": "https://nptel.ac.in/content/storage2/courses/105106115/pdf/m2l8.pdf",
+      "domain": "cost",
+      "doc_type": "lecture_notes",
+      "pub_year": 2011,
+      "relevance_score": 0.83,
+      "priority": "Medium",
+      "filename": "nptel_cost_estimation_m2l8.pdf",
+      "topics": [
+        "cost overrun",
+        "BOQ",
+        "bill of quantities",
+        "rate analysis",
+        "contingency"
+      ]
+    },
+    {
+      "id": "osha_construction_safety_manual",
+      "title": "OSHA Construction Industry Standards - Subpart Q Concrete",
+      "source_org": "OSHA / US Department of Labor",
+      "url": "https://www.osha.gov/sites/default/files/publications/OSHA3252.pdf",
+      "domain": "safety",
+      "doc_type": "standard",
+      "pub_year": 2004,
+      "relevance_score": 0.87,
+      "priority": "High",
+      "filename": "osha_construction_concrete_safety.pdf",
+      "topics": [
+        "concrete pouring safety",
+        "formwork safety",
+        "fall protection",
+        "worker safety",
+        "PPE"
+      ]
+    },
+    {
+      "id": "fhwa_honeycombing_defect",
+      "title": "Honeycombing and Surface Defects in Concrete - FHWA Tech Note",
+      "source_org": "FHWA",
+      "url": "https://www.fhwa.dot.gov/infrastructure/materialsgrp/pccp.pdf",
+      "domain": "honeycombing",
+      "doc_type": "report",
+      "pub_year": 2006,
+      "relevance_score": 0.88,
+      "priority": "High",
+      "filename": "fhwa_honeycombing_defects.pdf",
+      "topics": [
+        "honeycombing",
+        "voids",
+        "surface defects",
+        "compaction",
+        "vibration"
+      ]
+    },
+    {
+      "id": "usace_quality_management",
+      "title": "Quality Management - Construction Quality Control Plan",
+      "source_org": "US Army Corps of Engineers",
+      "url": "https://www.publications.usace.army.mil/Portals/76/Publications/EngineerPamphlets/EP_415-1-261.pdf",
+      "domain": "quality",
+      "doc_type": "manual",
+      "pub_year": 2002,
+      "relevance_score": 0.9,
+      "priority": "High",
+      "filename": "usace_quality_management_EP415.pdf",
+      "topics": [
+        "QA QC",
+        "quality control plan",
+        "inspection checklists",
+        "testing",
+        "documentation"
+      ]
+    },
+    {
+      "id": "fhwa_reinforcement_steel",
+      "title": "Steel Reinforcement - Placement, Splicing and Development",
+      "source_org": "FHWA / CRSI",
+      "url": "https://www.fhwa.dot.gov/bridge/reinforced/hifr10028.pdf",
+      "domain": "inspection",
+      "doc_type": "manual",
+      "pub_year": 2010,
+      "relevance_score": 0.85,
+      "priority": "Medium",
+      "filename": "fhwa_reinforcement_steel_placement.pdf",
+      "topics": [
+        "reinforcement",
+        "rebar placement",
+        "development length",
+        "splicing",
+        "cover"
+      ]
+    },
+    {
+      "id": "usace_inspection_concrete",
+      "title": "Inspection of Concrete - Construction Quality Assurance",
+      "source_org": "US Army Corps of Engineers",
+      "url": "https://www.publications.usace.army.mil/Portals/76/Publications/EngineerManuals/EM_1110-2-2000.pdf",
+      "domain": "inspection",
+      "doc_type": "manual",
+      "pub_year": 1994,
+      "relevance_score": 0.95,
+      "priority": "High",
+      "filename": "usace_inspection_concrete_EM1110.pdf",
+      "topics": [
+        "concrete inspection",
+        "slump test",
+        "compressive strength",
+        "curing inspection",
+        "formwork inspection"
+      ]
+    },
+    {
+      "id": "nptel_material_management",
+      "title": "NPTEL - Material Management in Construction",
+      "source_org": "NPTEL / IIT Madras",
+      "url": "https://nptel.ac.in/content/storage2/courses/105106115/pdf/m3l15.pdf",
+      "domain": "material_management",
+      "doc_type": "lecture_notes",
+      "pub_year": 2011,
+      "relevance_score": 0.8,
+      "priority": "Medium",
+      "filename": "nptel_material_management_m3l15.pdf",
+      "topics": [
+        "material procurement",
+        "inventory management",
+        "site logistics",
+        "waste management",
+        "material storage"
+      ]
+    },
+    {
+      "id": "nptel_boq_estimating",
+      "title": "NPTEL - Quantity Estimation and BOQ Preparation",
+      "source_org": "NPTEL / IIT Bombay",
+      "url": "https://nptel.ac.in/content/storage2/courses/105101005/pdf/mod1.pdf",
+      "domain": "boq",
+      "doc_type": "lecture_notes",
+      "pub_year": 2009,
+      "relevance_score": 0.82,
+      "priority": "Medium",
+      "filename": "nptel_quantity_estimation_boq.pdf",
+      "topics": [
+        "bill of quantities",
+        "quantity takeoff",
+        "measurement",
+        "specifications",
+        "rate analysis"
+      ]
+    },
+    {
+      "id": "concrete_water_cement_ratio",
+      "title": "Water-Cement Ratio in Concrete - IS 456:2000 and Mix Design Principles",
+      "source_org": "Bureau of Indian Standards / NPTEL",
+      "url": "https://bis.gov.in",
+      "domain": "concrete",
+      "doc_type": "knowledge_text",
+      "pub_year": 2000,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "concrete_water_cement_ratio.txt",
+      "topics": [
+        "water cement ratio",
+        "mix design",
+        "IS 456",
+        "concrete quality"
+      ]
+    },
+    {
+      "id": "concrete_curing_requirements",
+      "title": "Concrete Curing Requirements - IS 456:2000 Section 13",
+      "source_org": "Bureau of Indian Standards",
+      "url": "https://bis.gov.in",
+      "domain": "concrete",
+      "doc_type": "knowledge_text",
+      "pub_year": 2000,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "concrete_curing_requirements.txt",
+      "topics": [
+        "curing",
+        "hydration",
+        "IS 456",
+        "curing duration",
+        "curing methods"
+      ]
+    },
+    {
+      "id": "concrete_grades_specifications",
+      "title": "Concrete Grades and Specifications - IS 456:2000",
+      "source_org": "Bureau of Indian Standards",
+      "url": "https://bis.gov.in",
+      "domain": "concrete",
+      "doc_type": "knowledge_text",
+      "pub_year": 2000,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "concrete_grades_specifications.txt",
+      "topics": [
+        "concrete grade",
+        "M25",
+        "M30",
+        "M35",
+        "M40",
+        "compressive strength"
+      ]
+    },
+    {
+      "id": "crack_classification_causes",
+      "title": "Classification and Causes of Cracks in Concrete Structures",
+      "source_org": "FHWA / NPTEL IIT Madras",
+      "url": "https://nptel.ac.in/courses/105106202",
+      "domain": "cracks",
+      "doc_type": "knowledge_text",
+      "pub_year": 2015,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "crack_classification_causes.txt",
+      "topics": [
+        "crack classification",
+        "plastic shrinkage cracks",
+        "thermal cracks",
+        "structural cracks",
+        "crack causes"
+      ]
+    },
+    {
+      "id": "crack_prevention_water_cement",
+      "title": "Crack Prevention Through Water-Cement Ratio Control",
+      "source_org": "CPWD / BIS",
+      "url": "https://cpwd.gov.in",
+      "domain": "cracks",
+      "doc_type": "knowledge_text",
+      "pub_year": 2019,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "crack_prevention_water_cement.txt",
+      "topics": [
+        "crack prevention",
+        "W/C ratio control",
+        "evaporation rate",
+        "plastic cracking"
+      ]
+    },
+    {
+      "id": "honeycombing_causes_prevention",
+      "title": "Honeycombing in Concrete - Causes, Detection, and Remediation",
+      "source_org": "CPWD / FHWA",
+      "url": "https://cpwd.gov.in",
+      "domain": "honeycombing",
+      "doc_type": "knowledge_text",
+      "pub_year": 2019,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "honeycombing_causes_prevention.txt",
+      "topics": [
+        "honeycombing",
+        "voids",
+        "compaction",
+        "vibration",
+        "concrete defects",
+        "formwork"
+      ]
+    },
+    {
+      "id": "quality_assurance_construction",
+      "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+      "source_org": "CPWD / Bureau of Indian Standards",
+      "url": "https://cpwd.gov.in",
+      "domain": "quality",
+      "doc_type": "knowledge_text",
+      "pub_year": 2022,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "quality_assurance_construction.txt",
+      "topics": [
+        "QA QC",
+        "quality assurance",
+        "inspection checklist",
+        "concrete testing",
+        "cube test"
+      ]
+    },
+    {
+      "id": "construction_safety_concrete_work",
+      "title": "Construction Safety for Concrete Placing Operations",
+      "source_org": "OSHA / National Building Code Part 7",
+      "url": "https://www.osha.gov",
+      "domain": "safety",
+      "doc_type": "knowledge_text",
+      "pub_year": 2020,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "construction_safety_concrete_work.txt",
+      "topics": [
+        "concrete safety",
+        "formwork collapse",
+        "PPE",
+        "fall protection",
+        "hazardous conditions"
+      ]
+    },
+    {
+      "id": "ndt_concrete_inspection",
+      "title": "Non-Destructive Testing of Concrete Structures",
+      "source_org": "Bureau of Indian Standards / NPTEL",
+      "url": "https://bis.gov.in",
+      "domain": "inspection",
+      "doc_type": "knowledge_text",
+      "pub_year": 2013,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "ndt_concrete_inspection.txt",
+      "topics": [
+        "NDT",
+        "rebound hammer",
+        "ultrasonic pulse velocity",
+        "concrete testing",
+        "structural assessment"
+      ]
+    },
+    {
+      "id": "construction_delay_analysis",
+      "title": "Construction Project Delay Analysis and Causes",
+      "source_org": "NPTEL / IIT Kharagpur",
+      "url": "https://nptel.ac.in",
+      "domain": "delays",
+      "doc_type": "knowledge_text",
+      "pub_year": 2012,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "construction_delay_analysis.txt",
+      "topics": [
+        "project delays",
+        "delay analysis",
+        "critical path",
+        "schedule management",
+        "causes of delay"
+      ]
+    },
+    {
+      "id": "cost_overrun_management",
+      "title": "Cost Overrun Causes and Management in Construction",
+      "source_org": "NPTEL / IIT Madras",
+      "url": "https://nptel.ac.in",
+      "domain": "cost",
+      "doc_type": "knowledge_text",
+      "pub_year": 2011,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "cost_overrun_management.txt",
+      "topics": [
+        "cost overrun",
+        "budget management",
+        "earned value",
+        "BOQ",
+        "contingency"
+      ]
+    },
+    {
+      "id": "material_management_concrete",
+      "title": "Material Management for Concrete Construction",
+      "source_org": "CPWD / NPTEL",
+      "url": "https://cpwd.gov.in",
+      "domain": "material_management",
+      "doc_type": "knowledge_text",
+      "pub_year": 2022,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "material_management_concrete.txt",
+      "topics": [
+        "cement storage",
+        "aggregate stockpiling",
+        "material testing",
+        "procurement",
+        "inventory"
+      ]
+    },
+    {
+      "id": "bill_of_quantities_preparation",
+      "title": "Bill of Quantities - Preparation and Measurement",
+      "source_org": "CPWD / Bureau of Indian Standards",
+      "url": "https://cpwd.gov.in",
+      "domain": "boq",
+      "doc_type": "knowledge_text",
+      "pub_year": 2023,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "bill_of_quantities_preparation.txt",
+      "topics": [
+        "bill of quantities",
+        "measurement",
+        "rate analysis",
+        "specifications",
+        "tendering"
+      ]
+    },
+    {
+      "id": "is_456_key_provisions",
+      "title": "IS 456:2000 - Key Provisions for Plain and Reinforced Concrete",
+      "source_org": "Bureau of Indian Standards",
+      "url": "https://standardsbis.bsbedge.com",
+      "domain": "standards",
+      "doc_type": "knowledge_text",
+      "pub_year": 2000,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "is_456_key_provisions.txt",
+      "topics": [
+        "IS 456",
+        "concrete standard",
+        "reinforced concrete",
+        "structural design",
+        "India standard"
+      ]
+    },
+    {
+      "id": "construction_failure_analysis",
+      "title": "Construction Failure Modes and Root Cause Analysis",
+      "source_org": "NPTEL / IIT Madras",
+      "url": "https://nptel.ac.in/courses/105106202",
+      "domain": "reports",
+      "doc_type": "knowledge_text",
+      "pub_year": 2015,
+      "relevance_score": 0.92,
+      "priority": "High",
+      "filename": "construction_failure_analysis.txt",
+      "topics": [
+        "failure analysis",
+        "root cause",
+        "structural failure",
+        "quality defects",
+        "lessons learned"
+      ]
+    }
+  ]
+}
