@@ -51,3 +51,6 @@ Thumbs.db
 retrain_cost_model.py
 generate_pdf.py
 fix_synth.py
+
+patch_defect_type.py
+synthetic_defect_dataset.csv
