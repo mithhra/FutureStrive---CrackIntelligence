@@ -787,8 +787,17 @@ elif nav == "AI Assistant":
                             if ann is not None:
                                 st.image(ann, caption="Detection overlay", use_container_width=True)
 
+                        # Show model mode banner — makes errors visible
+                        _mode = det.get("model_mode", "stub")
+                        if _mode == "real":
+                            st.success("✅ Live model — DeepLabV3+ (ResNet-101)")
+                        elif _mode == "stub":
+                            st.info("ℹ️ Demo mode — set USE_STUB=False and provide model path to use real model")
+                        else:
+                            st.warning(f"⚠️ Fell back to demo mode. Reason: `{_mode}`")
+
                         # Build user chat message
-                        mode_note = " *(demo mode)*" if "stub" in det.get("model_mode", "stub") else ""
+                        mode_note = " *(demo mode)*" if "stub" in _mode else ""
                         user_msg = (
                             f"📷 **Crack photo uploaded{mode_note}** — please analyse and generate an engineering report."
                         )

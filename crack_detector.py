@@ -40,12 +40,12 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-# Set to False once best_model.pth is copied into this project folder
-USE_STUB: bool = True
+# Set to False once best_model.pth is available
+USE_STUB: bool = False
 
-# Path to your trained model checkpoint (best_model.pth from Crack/checkpoints/)
-# Copy the file here and update the path:
-REAL_MODEL_PATH: str = "best_model.pth"
+# Full absolute path to your trained model checkpoint
+# On the other laptop it lives here:
+REAL_MODEL_PATH: str = r"C:\Crack Intelligence\FutureStrive-crack-intelligence\checkpoints\best_model.pth"
 
 # ── Model architecture settings (must match what was used during training) ─────
 _ENCODER_NAME    = "resnet101"   # from config.py — upgraded from resnet50
@@ -348,23 +348,27 @@ def _overlay_mask_real(image: Image.Image, bin_mask,
 def run_crack_detection(image: Image.Image) -> dict:
     """
     Main entry point.  Called from app.py with a PIL Image.
-
     Returns the standard detection dict (see module docstring).
-    Falls back to stub mode if USE_STUB is True or if the real model
-    raises any exception.
+    Falls back to stub mode if USE_STUB is True or model file is missing.
     """
-    if USE_STUB or not os.path.exists(REAL_MODEL_PATH):
+    if USE_STUB:
         return _stub_detection(image)
+
+    if not os.path.exists(REAL_MODEL_PATH):
+        result = _stub_detection(image)
+        result["model_mode"] = f"stub_fallback:model file not found at {REAL_MODEL_PATH}"
+        return result
 
     try:
         model = _load_real_model()
         return _run_real_model(model, image)
-    except NotImplementedError:
-        return _stub_detection(image)
-    except Exception as e:
-        # Graceful fallback — never crash the UI
+    except ImportError as e:
         result = _stub_detection(image)
-        result["model_mode"] = f"stub_fallback:{str(e)[:60]}"
+        result["model_mode"] = f"stub_fallback:missing package — {str(e)[:80]}"
+        return result
+    except Exception as e:
+        result = _stub_detection(image)
+        result["model_mode"] = f"stub_fallback:{str(e)[:80]}"
         return result
 
 
