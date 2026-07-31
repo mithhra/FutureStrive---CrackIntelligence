@@ -40,14 +40,20 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-# Set to False once your real model is ready
+# Set to False once best_model.pth is copied into this project folder
 USE_STUB: bool = True
 
-# Path to your saved model file — update this when your model is ready
-REAL_MODEL_PATH: str = "crack_segmentation_model.pt"   # e.g. .pt / .h5 / .onnx
+# Path to your trained model checkpoint (best_model.pth from Crack/checkpoints/)
+# Copy the file here and update the path:
+REAL_MODEL_PATH: str = "best_model.pth"
 
-# ── Severity thresholds (area_fraction %) ─────────────────────────────────────
-# Used by the stub and also by any real model that returns raw area fraction
+# ── Model architecture settings (must match what was used during training) ─────
+_ENCODER_NAME    = "resnet101"   # from config.py — upgraded from resnet50
+_IMAGE_SIZE      = 512           # from config.py
+_IMG_MEAN        = (0.485, 0.456, 0.406)   # ImageNet normalisation
+_IMG_STD         = (0.229, 0.224, 0.225)
+_CRACK_THRESHOLD = 0.5           # from config.py — pixels above this = crack
+
 SEVERITY_THRESHOLDS = {
     "Minor"    : (0.0,  1.5),   # < 1.5% of image is crack
     "Moderate" : (1.5,  4.0),
@@ -185,87 +191,154 @@ def _stamp_no_crack(img: Image.Image) -> None:
 
 def _load_real_model():
     """
-    Load your trained segmentation model.
-    Called once — cache the result yourself or use @st.cache_resource in app.py.
-
-    EXAMPLE for a PyTorch model:
-        import torch
-        model = torch.load(REAL_MODEL_PATH, map_location="cpu")
-        model.eval()
-        return model
-
-    EXAMPLE for an ONNX model:
-        import onnxruntime as ort
-        session = ort.InferenceSession(REAL_MODEL_PATH)
-        return session
-
-    EXAMPLE for a Keras / TF SavedModel:
-        import tensorflow as tf
-        model = tf.saved_model.load(REAL_MODEL_PATH)
-        return model
+    Load the trained DeepLabV3+ (ResNet-101) crack segmentation model.
+    Matches the exact pattern used in Crack/src/predict.py :: get_model()
     """
-    raise NotImplementedError(
-        "Real model not yet connected. "
-        "Implement _load_real_model() and _run_real_model() in crack_detector.py, "
-        "then set USE_STUB = False."
+    import torch
+    import segmentation_models_pytorch as smp
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    model = smp.DeepLabV3Plus(
+        encoder_name    = _ENCODER_NAME,   # resnet101
+        encoder_weights = None,            # no pretrained weights — loading our checkpoint
+        in_channels     = 3,
+        classes         = 1,
+        activation      = None,            # raw logits, sigmoid applied in inference
     )
 
+    ckpt = torch.load(REAL_MODEL_PATH, map_location=device)
+    model.load_state_dict(ckpt["model_state"])
+    model.eval()
+    model.to(device)
+    return (model, device)
 
-def _run_real_model(model, image: Image.Image) -> dict:
+
+def _run_real_model(model_bundle, image: Image.Image) -> dict:
     """
-    Run your model on a PIL image.
-
-    You must populate all keys in the output dict.
-    See the docstring at the top of this file for the full contract.
-
-    MINIMUM you need to fill in:
-        crack_detected, confidence, crack_type, severity_estimate,
-        area_fraction, num_instances, estimated_width_mm,
-        bounding_boxes, annotated_image
-
-    Set model_mode = "real" always.
-
-    EXAMPLE skeleton:
-        import torch, torchvision.transforms as T
-        transform = T.Compose([T.Resize((512,512)), T.ToTensor()])
-        tensor = transform(image).unsqueeze(0)
-        with torch.no_grad():
-            output = model(tensor)
-        mask = output["masks"][0].squeeze().numpy()  # H x W binary mask
-        area_fraction = float(mask.mean() * 100)
-        ...
-        annotated = _overlay_mask_on_image(image, mask)
-        return {
-            "crack_detected"    : area_fraction > 0.1,
-            "confidence"        : float(output["scores"][0]),
-            "crack_type"        : "Structural",   # from your classifier head
-            "severity_estimate" : _area_to_severity(area_fraction),
-            "area_fraction"     : area_fraction,
-            "num_instances"     : int(len(output["masks"])),
-            "estimated_width_mm": ...,
-            "bounding_boxes"    : output["boxes"].tolist(),
-            "annotated_image"   : annotated,
-            "model_mode"        : "real",
-        }
+    Run DeepLabV3+ inference on a PIL Image.
+    Matches the exact logic in Crack/src/predict.py :: predict_crack()
     """
-    raise NotImplementedError("Implement _run_real_model() in crack_detector.py.")
+    import torch
+    import cv2
+    import numpy as np
+    import albumentations as A
+    from albumentations.pytorch import ToTensorV2
+
+    model, device = model_bundle
+
+    # ── Preprocessing (same as predict.py) ────────────────────────────────────
+    transform = A.Compose([
+        A.Resize(_IMAGE_SIZE, _IMAGE_SIZE),
+        A.Normalize(mean=_IMG_MEAN, std=_IMG_STD),
+        ToTensorV2(),
+    ])
+
+    raw_rgb = np.array(image.convert("RGB"))
+    orig_h, orig_w = raw_rgb.shape[:2]
+    img_tensor = transform(image=raw_rgb)["image"].unsqueeze(0).to(device)
+
+    # ── Inference ─────────────────────────────────────────────────────────────
+    with torch.no_grad():
+        use_amp = device.type == "cuda"
+        with torch.autocast(device_type=device.type, enabled=use_amp):
+            logits = model(img_tensor)
+        probs = torch.sigmoid(logits).squeeze().float().cpu().numpy()
+
+    # ── Resize back to original ────────────────────────────────────────────────
+    conf_map = cv2.resize(probs, (orig_w, orig_h), interpolation=cv2.INTER_LINEAR)
+    bin_mask  = (conf_map > _CRACK_THRESHOLD).astype(np.uint8)
+
+    # ── Stats ─────────────────────────────────────────────────────────────────
+    crack_pixels  = int(bin_mask.sum())
+    total_pixels  = bin_mask.size
+    area_fraction = round(crack_pixels / total_pixels * 100, 3)
+    crack_detected = crack_pixels > 0
+    confidence     = float(conf_map[bin_mask.astype(bool)].mean()) if crack_detected else 0.0
+    severity       = _area_to_severity(area_fraction) if crack_detected else "None"
+
+    # ── Infer crack type from area fraction ───────────────────────────────────
+    if not crack_detected:
+        crack_type = "No Crack"
+    elif area_fraction < 1.0:
+        crack_type = "Hairline"
+    elif area_fraction < 4.0:
+        crack_type = "Shrinkage"
+    elif area_fraction < 8.0:
+        crack_type = "Structural"
+    else:
+        crack_type = "Settlement"
+
+    # ── Bounding boxes from connected components ───────────────────────────────
+    boxes = []
+    num_instances = 0
+    if crack_detected:
+        num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(bin_mask, connectivity=8)
+        for i in range(1, num_labels):
+            x, y, w, h, area = stats[i]
+            if area > 20:
+                boxes.append([int(x), int(y), int(x + w), int(y + h)])
+        num_instances = len(boxes)
+
+    # ── Estimated width (proxy from area / diagonal) ───────────────────────────
+    width_mm = 0.0
+    if crack_detected:
+        diag_px  = (orig_w ** 2 + orig_h ** 2) ** 0.5
+        width_px = (area_fraction / 100) * diag_px * 0.08
+        width_mm = round(min(width_px * 0.264583, 2.0), 2)
+
+    # ── Annotated overlay ─────────────────────────────────────────────────────
+    annotated = _overlay_mask_real(image, bin_mask, boxes, severity, crack_type, confidence)
+
+    return {
+        "crack_detected"     : crack_detected,
+        "confidence"         : round(confidence, 3),
+        "crack_type"         : crack_type,
+        "severity_estimate"  : severity,
+        "area_fraction"      : area_fraction,
+        "num_instances"      : num_instances,
+        "estimated_width_mm" : width_mm,
+        "bounding_boxes"     : boxes,
+        "annotated_image"    : annotated,
+        "model_mode"         : "real",
+    }
 
 
-def _overlay_mask_on_image(image: Image.Image, mask: np.ndarray,
-                            color=(255, 50, 50, 120)) -> Image.Image:
-    """
-    Helper: overlay a binary segmentation mask on the original image.
-    mask: H x W numpy array with values 0/1 or 0/255
-    """
-    img_rgba = image.convert("RGBA")
-    overlay = Image.new("RGBA", img_rgba.size, (0, 0, 0, 0))
-    draw = ImageDraw.Draw(overlay)
-    mask_bin = (mask > 0.5).astype(np.uint8) * 255
-    for y in range(mask_bin.shape[0]):
-        for x in range(mask_bin.shape[1]):
-            if mask_bin[y, x]:
-                draw.point((x, y), fill=color)
-    return Image.alpha_composite(img_rgba, overlay).convert("RGB")
+def _overlay_mask_real(image: Image.Image, bin_mask,
+                       boxes: list, severity: str,
+                       crack_type: str, confidence: float) -> Image.Image:
+    """Red semi-transparent crack overlay + bounding boxes. No watermark."""
+    import numpy as np
+    import cv2
+
+    colors = {
+        "Minor"   : (34,  197,  94),
+        "Moderate": (245, 158,  11),
+        "Severe"  : (239,  68,  68),
+        "Critical": (124,  58, 237),
+        "None"    : (100, 100, 100),
+    }
+    bgr_color = colors.get(severity, (239, 68, 68))[::-1]
+
+    raw_rgb = np.array(image.convert("RGB"))
+    overlay  = raw_rgb.copy()
+    overlay[bin_mask.astype(bool)] = [255, 0, 0]
+    blended  = (0.6 * raw_rgb + 0.4 * overlay).astype(np.uint8)
+
+    for (x1, y1, x2, y2) in boxes:
+        cv2.rectangle(blended, (x1, y1), (x2, y2), bgr_color, 2)
+        label = f"{crack_type} {confidence*100:.0f}%"
+        cv2.rectangle(blended, (x1, y1 - 18), (x1 + len(label) * 7, y1), bgr_color, -1)
+        cv2.putText(blended, label, (x1 + 2, y1 - 4),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 255, 255), 1)
+
+    h, w = blended.shape[:2]
+    cv2.rectangle(blended, (0, h - 28), (230, h), (15, 23, 42), -1)
+    cv2.putText(blended, "Live Model — DeepLabV3+", (4, h - 8),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.45, (34, 197, 94), 1)
+
+    return Image.fromarray(blended)
+
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
