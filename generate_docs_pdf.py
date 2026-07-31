@@ -304,8 +304,8 @@ def build_pdf(filename="Construction Intelligence Platform – Functional Docume
         [Paragraph("<b>Document Title:</b>", body_style), Paragraph("Construction Intelligence Platform – Functional Documentation", body_style)],
         [Paragraph("<b>Author:</b>", body_style), Paragraph("FutureStrive Lead Design Team", body_style)],
         [Paragraph("<b>Target Audience:</b>", body_style), Paragraph("Stakeholders, Quality Engineers, Development Team", body_style)],
-        [Paragraph("<b>Version:</b>", body_style), Paragraph("v2.4-production", body_style)],
-        [Paragraph("<b>Release Date:</b>", body_style), Paragraph("July 16, 2026", body_style)]
+        [Paragraph("<b>Version:</b>", body_style), Paragraph("v3.0 — Reactive Crack Detection Release", body_style)],
+        [Paragraph("<b>Release Date:</b>", body_style), Paragraph("July 31, 2026", body_style)]
     ]
     t = Table(meta_table_data, colWidths=[120, 380])
     t.setStyle(TableStyle([
@@ -462,20 +462,42 @@ def build_pdf(filename="Construction Intelligence Platform – Functional Docume
     ))
     
     # ----------------- SECTION 12: REACTIVE INSPECTION WORKFLOW -----------------
-    story.append(Paragraph("12. Reactive Inspection Workflow", h1_style))
+    story.append(Paragraph("12. Reactive Crack Detection Workflow", h1_style))
     story.append(Paragraph(
-        "The computer vision inspection logs concrete surface images. The server parses the image and overlays bounding "
-        "boxes with coordinate positions. The defect is logged with confidence rates and severity tags, generating a download "
-        "registry of site faults.",
+        "The reactive inspection track allows site engineers to upload a photograph of a concrete surface directly "
+        "inside the AI Assistant. The platform passes the image through a pluggable segmentation/detection model wrapper "
+        "(crack_detector.py) that returns structured features: crack type, severity, area fraction, estimated width, "
+        "bounding boxes, and an annotated overlay image. The AI assistant then builds an IS-code-referenced engineering "
+        "report via Qwen LLM or a rule-based fallback."
+        "<br/><br/>"
+        "<b>Detection pipeline steps:</b><br/>"
+        "1. <b>Image Upload:</b> User expands the Upload Crack Photo panel in the AI Assistant and uploads a JPG/PNG.<br/>"
+        "2. <b>Model Inference:</b> crack_detector.run_crack_detection(image) is called. In production this runs the "
+        "trained segmentation model. In demo mode (USE_STUB=True) synthetic outputs are seeded from image pixel data "
+        "for repeatable UI testing.<br/>"
+        "3. <b>Annotated Overlay:</b> Bounding boxes with severity-coded colours are drawn on the image "
+        "(green=Minor, amber=Moderate, red=Severe, purple=Critical).<br/>"
+        "4. <b>LLM Report:</b> qwen_crack_image_report() injects the detection dict into Qwen context and generates "
+        "a structured report: Executive Summary, Root Cause Analysis, Risk to Structure, Remediation Recommendations "
+        "(IS 456:2000, IS 13311, IS 516 referenced), and Urgency Level.<br/>"
+        "5. <b>Rule-based Fallback:</b> _fallback_image_report() produces the same structured report without any LLM call.<br/>"
+        "6. <b>Chat Integration:</b> Report appended to chat thread. Follow-up questions re-route to image_crack_analysis intent.",
         body_style
     ))
     
     # ----------------- SECTION 13: AI COPILOT WORKFLOW -----------------
     story.append(Paragraph("13. AI Copilot Workflow", h1_style))
     story.append(Paragraph(
-        "The Copilot tab handles user natural language prompts. Using a keyword index, it queries a TF-IDF vectorizer of the "
-        "reference manual and retrieves relevant page context. The local Qwen model then compiles an engineering answer. "
-        "It contains session-state overrides to explain simulator states.",
+        "The AI Assistant handles user natural language prompts through a 7-way intent router:"
+        "<br/><b>1. greeting</b> — Returns a welcome message listing capabilities."
+        "<br/><b>2. image_crack_analysis</b> — Reactive track: fires when a photo is pending, routes to crack_detector + Qwen report."
+        "<br/><b>3. crack_prediction</b> — Rule-based IS 456 flagging on live pour parameters (no LLM call)."
+        "<br/><b>4. defect_prediction</b> — Rule-based QC/SPI analysis on live defect parameters (no LLM call)."
+        "<br/><b>5. analytical</b> — Pandas filter on active session parameters for numerical comparison queries."
+        "<br/><b>6. knowledge</b> — FAISS retrieval (top-4 chunks) followed by Qwen 2.5-0.5B-Instruct generation."
+        "<br/><b>7. off_topic</b> — Politely declines non-construction queries."
+        "<br/><br/>For knowledge queries, Qwen receives: active module parameters, IS code deviation flags, "
+        "last 3 prediction records, and FAISS knowledge chunks from the IS 456, CPWD, and IS 13311 knowledge base.",
         body_style
     ))
     
@@ -489,16 +511,19 @@ def build_pdf(filename="Construction Intelligence Platform – Functional Docume
     
     # ----------------- SECTION 15: CURRENT IMPLEMENTED FEATURES -----------------
     story.append(Paragraph("15. Current Implemented Features", h1_style))
-    story.append(Paragraph("• **Multi-page Navigation:** Functional left sidebar radiogroup.", bullet_style))
-    story.append(Paragraph("• **Live Interactive Simulator:** Recalculates variables and risk scores dynamically.", bullet_style))
-    story.append(Paragraph("• **PIL Bounding Box Overlay:** Draws cracks/honeycombs on uploaded images.", bullet_style))
-    story.append(Paragraph("• **Explainer charts:** Altair SHAP waterfalls and feature importance bars.", bullet_style))
-    story.append(Paragraph("• **Copilot suggestions:** Shortcuts to explain simulator predictions.", bullet_style))
-    
+    story.append(Paragraph("• <b>Multi-page Navigation:</b> Functional left sidebar radiogroup.", bullet_style))
+    story.append(Paragraph("• <b>Crack Intelligence (Predictive):</b> 21-input pour parameter form with XGBoost prediction + inline SHAP driver chart + IS 456 corrective recommendations.", bullet_style))
+    story.append(Paragraph("• <b>Defect Volume Intelligence (Predictive):</b> 26-input form with XGBoost prediction + driver analysis + improvement recommendations.", bullet_style))
+    story.append(Paragraph("• <b>Reactive Crack Detection:</b> Photo upload in AI Assistant → crack_detector.py segmentation wrapper → annotated overlay → IS-code-referenced engineering report in chat thread.", bullet_style))
+    story.append(Paragraph("• <b>Prediction History:</b> Tabbed trend charts for both predictive modules with Altair line/bar visualisations.", bullet_style))
+    story.append(Paragraph("• <b>Unified AI Assistant:</b> 7-way intent router covering greeting, image analysis, crack/defect prediction, analytical, knowledge (FAISS+Qwen), and off-topic.", bullet_style))
+    story.append(Paragraph("• <b>Rule-based LLM Fallback:</b> Full IS-code-referenced engineering report generated without Qwen when the LLM is unavailable.", bullet_style))
+
     # ----------------- SECTION 16: REMAINING PLACEHOLDER FEATURES -----------------
-    story.append(Paragraph("16. Remaining Placeholder Features", h1_style))
-    story.append(Paragraph("• **Real-time databases:** Active project and prediction histories use RAM-based session state.", bullet_style))
-    story.append(Paragraph("• **Computer Vision Model API:** Core image overlay coordinates are simulated based on image tags.", bullet_style))
+    story.append(Paragraph("16. Remaining Placeholder / Planned Features", h1_style))
+    story.append(Paragraph("• <b>Real-time databases:</b> Active project and prediction histories use RAM-based session state. PostgreSQL integration planned.", bullet_style))
+    story.append(Paragraph("• <b>Production Crack Segmentation Model:</b> crack_detector.py currently runs in stub/demo mode (USE_STUB=True). The trained segmentation model will be connected by setting USE_STUB=False and implementing _run_real_model().", bullet_style))
+    story.append(Paragraph("• <b>Crack Width Estimation:</b> Estimated width in mm is synthetic in demo mode. The real model will provide pixel-accurate width derived from mask geometry.", bullet_style))
     
     # ----------------- SECTION 17: FUTURE BACKEND PLAN -----------------
     story.append(Paragraph("17. Future Backend Integration Plan", h1_style))

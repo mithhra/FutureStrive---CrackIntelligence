@@ -118,16 +118,17 @@ story += [
     Paragraph("Prediction Model Documentation", SUB),
     Spacer(1, 0.4 * cm),
     HRFlowable(width="55%", thickness=2, color=BLUE, spaceAfter=8),
-    Paragraph("Crack Intelligence · Defect Volume Intelligence", CAP),
+    Paragraph("Crack Intelligence · Defect Volume Intelligence · Reactive Crack Detection", CAP),
     Spacer(1, 0.8 * cm),
     Paragraph(
-        "This document provides a complete technical reference for both AI prediction modules "
+        "This document provides a complete technical reference for all AI modules "
         "in the Construction Intelligence Platform. It covers every input feature, the model "
-        "used for each prediction target, dataset characteristics, and measured accuracy.",
+        "used for each prediction target, dataset characteristics, measured accuracy, "
+        "and the reactive crack detection model wrapper contract.",
         _s("CovB", fontSize=11, leading=16, textColor=SLATE, alignment=TA_CENTER)
     ),
     Spacer(1, 0.5 * cm),
-    Paragraph("Version 1.0 · July 2026", CAP),
+    Paragraph("Version 2.0 · July 2026 · Reactive Detection Release", CAP),
     PageBreak(),
 ]
 
@@ -434,6 +435,84 @@ story.append(KeepTogether([
         "All scores measured on a held-out 20% test split (random_state=42). "
         "Excellent ≥ 0.90 | Very Good 0.85–0.89 | Good 0.80–0.84.", CAP),
 ]))
+
+# =============================================================================
+# SECTION 6 — REACTIVE CRACK DETECTION
+# =============================================================================
+story.append(section("6. Reactive Crack Detection Module"))
+story.append(Paragraph(
+    "The reactive track allows a site photo to be uploaded directly in the AI Assistant. "
+    "The platform passes the image through crack_detector.py — a pluggable model wrapper that enforces "
+    "a standard output contract so the AI report and chat integration work regardless of the underlying "
+    "segmentation architecture (PyTorch, ONNX, Keras, etc.).",
+    BODY))
+
+# 6.1 Output contract
+story.append(KeepTogether([
+    Paragraph("6.1  Model Output Contract", H3),
+    Paragraph(
+        "run_crack_detection(image) must always return a dict with these keys. "
+        "The LLM engine and app.py read exclusively from this dict.", BODY),
+    make_table([
+        ["Key",                   "Type",         "Description"],
+        ["crack_detected",        "bool",          "True if any crack is found in the image."],
+        ["confidence",            "float 0–1",     "Model confidence score for the top detection."],
+        ["crack_type",            "str",           "Hairline | Structural | Shrinkage | Settlement | No Crack"],
+        ["severity_estimate",     "str",           "Minor | Moderate | Severe | Critical | None"],
+        ["area_fraction",         "float",         "% of image pixels classified as crack."],
+        ["num_instances",         "int",           "Number of distinct crack segments detected."],
+        ["estimated_width_mm",    "float",         "Estimated real-world crack width in mm (from model or geometry)."],
+        ["bounding_boxes",        "list",          "List of [x1, y1, x2, y2] pixel-coordinate boxes."],
+        ["annotated_image",       "PIL.Image",     "Original image with overlay (bounding boxes / mask). None if no crack."],
+        ["model_mode",            "str",           "'real' for live model, 'stub' for demo mode, 'stub_fallback:...' on error."],
+    ], col_w=[4*cm, 2.5*cm, 10.5*cm], desc_col=2),
+]))
+story.append(Spacer(1, 0.3 * cm))
+
+# 6.2 Severity thresholds
+story.append(KeepTogether([
+    Paragraph("6.2  Severity Thresholds (Area Fraction)", H3),
+    make_table([
+        ["Severity",   "Area Fraction Range",  "Indicator Colour",  "Recommended Action"],
+        ["Minor",      "0 – 1.5%",             "Green",             "Monitor — document and re-inspect in 30 days."],
+        ["Moderate",   "1.5 – 4.0%",           "Amber",             "Repair within 7 days. Apply crack filler or sealant."],
+        ["Severe",     "4.0 – 8.0%",           "Red",               "Immediate repair. Restrict loading. Notify structural engineer."],
+        ["Critical",   "> 8.0%",               "Purple",            "STOP WORK. Evacuate area. Structural assessment required."],
+    ], col_w=[2.5*cm, 3.5*cm, 3.5*cm, 7.5*cm], desc_col=3),
+]))
+story.append(Spacer(1, 0.3 * cm))
+
+# 6.3 IS permissible width limits
+story.append(KeepTogether([
+    Paragraph("6.3  IS 456:2000 Permissible Crack Width by Type", H3),
+    make_table([
+        ["Crack Type",    "IS 456 Width Limit (mm)",  "Notes"],
+        ["Hairline",      "0.10",                      "Surface only. No structural implication if ≤ 0.10 mm."],
+        ["Shrinkage",     "0.20",                      "Plastic or drying. Exceeding limit requires curing remedy."],
+        ["Structural",    "0.20",                      "Flexural or shear. Exceeding limit requires structural review."],
+        ["Settlement",    "0.30",                      "Foundation movement. Geotechnical investigation required."],
+    ], col_w=[3*cm, 4*cm, 10*cm], desc_col=2),
+]))
+story.append(Spacer(1, 0.3 * cm))
+
+# 6.4 Plug-in instructions
+story.append(KeepTogether([
+    Paragraph("6.4  Connecting the Real Segmentation Model", H3),
+    Paragraph(
+        "Three changes are required in crack_detector.py when the trained model is ready:", BODY),
+    make_table([
+        ["Step", "File Location",               "Change"],
+        ["1",    "crack_detector.py line 47",   "Set REAL_MODEL_PATH to the saved model file path (.pt / .h5 / .onnx)."],
+        ["2",    "crack_detector.py line 44",   "Set USE_STUB = False to disable demo mode."],
+        ["3",    "crack_detector.py line 214",  "Implement _run_real_model(model, image) — run inference and return the standard dict. A PyTorch skeleton is provided in the function docstring."],
+    ], col_w=[1*cm, 4*cm, 12*cm], desc_col=2),
+    Spacer(1, 0.15 * cm),
+    Paragraph(
+        "No changes are required in app.py, intent_router.py, or llm_engine.py. "
+        "The report, IS code references, and chat integration work automatically from the returned dict.", BODY),
+]))
+
+story.append(PageBreak())
 
 # =============================================================================
 # BUILD
