@@ -1,0 +1,1333 @@
+[
+  {
+    "chunk_id": 0,
+    "doc_id": "bill_of_quantities_preparation",
+    "title": "Bill of Quantities - Preparation and Measurement",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "boq",
+    "doc_type": "knowledge_text",
+    "pub_year": 2023,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "bill of quantities",
+      "measurement",
+      "rate analysis",
+      "specifications",
+      "tendering"
+    ],
+    "page": 1,
+    "text": "BILL OF QUANTITIES (BOQ) IN CONSTRUCTION\nSource: IS 1200 Method of Measurement; CPWD DSR 2023\n1. DEFINITION\nA Bill of Quantities is a document prepared during the design stage that:\n- Lists all the work items required to complete a project\n- Provides units of measurement and quantities for each item\n- Allows contractors to price on a common basis\n- Forms the basis for valuing interim payments and variations\n2. BOQ STRUCTURE\nDivision by trade or element:\nPart A: Earthwork and excavation\nPart B: Concrete and reinforcement\nPart C: Masonry\nPart D: Finishing (plaster, tiles, paint)"
+  },
+  {
+    "chunk_id": 1,
+    "doc_id": "bill_of_quantities_preparation",
+    "title": "Bill of Quantities - Preparation and Measurement",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "boq",
+    "doc_type": "knowledge_text",
+    "pub_year": 2023,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "bill of quantities",
+      "measurement",
+      "rate analysis",
+      "specifications",
+      "tendering"
+    ],
+    "page": 1,
+    "text": "ement\nPart C: Masonry\nPart D: Finishing (plaster, tiles, paint)\nPart E: Structural steel\nPart F: Services (MEP)\nPart G: External works\nPreambles: Specification notes binding on contractor\nProvisional Sums (PS): Items where scope undefined at tender\nPrime Cost (PC) Items: Specialist work; sub-contractors nominated by owner\n3. CONCRETE BOQ ITEMS (IS 1200 Part 2)\nMeasurement: In-situ concrete measured in cubic metres (m3) of finished work\nNo deduction for: Reinforcement bars, formed holes less than 0.1 m3 each\nDeduct: Formed openings > 0.1 m3\nTypical BOQ rate includes:"
+  },
+  {
+    "chunk_id": 2,
+    "doc_id": "bill_of_quantities_preparation",
+    "title": "Bill of Quantities - Preparation and Measurement",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "boq",
+    "doc_type": "knowledge_text",
+    "pub_year": 2023,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "bill of quantities",
+      "measurement",
+      "rate analysis",
+      "specifications",
+      "tendering"
+    ],
+    "page": 1,
+    "text": "Formed openings > 0.1 m3\nTypical BOQ rate includes:\n- Materials: Cement, aggregate, water, admixtures\n- Labour: Mixing, placing, vibrating, finishing\n- Plant: Concrete pump, transit mixer, vibrator\n- Overheads and profit\n4. REINFORCEMENT MEASUREMENT (IS 1200 Part 4)\nMeasured in metric tonnes (MT)\nIncludes: Bar length from drawings + standard hooks and bends (IS 2502)\nExcludes: Wastage allowance (contractor to price)\nLap lengths included as designed (typically 40-60 bar diameters)\n5. RATE ANALYSIS COMPONENTS\nRate per m3 of concrete = Materials cost + Labour + Plant + Overheads + Profit"
+  },
+  {
+    "chunk_id": 3,
+    "doc_id": "bill_of_quantities_preparation",
+    "title": "Bill of Quantities - Preparation and Measurement",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "boq",
+    "doc_type": "knowledge_text",
+    "pub_year": 2023,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "bill of quantities",
+      "measurement",
+      "rate analysis",
+      "specifications",
+      "tendering"
+    ],
+    "page": 1,
+    "text": "er m3 of concrete = Materials cost + Labour + Plant + Overheads + Profit\nMaterials cost per m3 (M35 concrete example):\nCement 400 kg x Rs.X/bag = Rs.\n20mm CA 680 kg x Rs.Y/MT = Rs.\nFine aggregate 620 kg x Rs.Z/MT = Rs.\nWater + admixtures = Rs.\nTotal materials = Rs.\n6. VARIATION ORDERS (VO) AND CLAIMS\nAny work not in BOQ or change to BOQ quantity > 10%:\n- Issue Variation Order with drawing reference\n- Agree rate before execution (where possible)\n- Star rate for new items: Build-up from labour + material + overhead + profit\nReference: IS 1200 Parts 1-26; CPWD DSR 2023; FIDIC Red Book Clause 12"
+  },
+  {
+    "chunk_id": 4,
+    "doc_id": "bill_of_quantities_preparation",
+    "title": "Bill of Quantities - Preparation and Measurement",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "boq",
+    "doc_type": "knowledge_text",
+    "pub_year": 2023,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "bill of quantities",
+      "measurement",
+      "rate analysis",
+      "specifications",
+      "tendering"
+    ],
+    "page": 1,
+    "text": "profit\nReference: IS 1200 Parts 1-26; CPWD DSR 2023; FIDIC Red Book Clause 12"
+  },
+  {
+    "chunk_id": 5,
+    "doc_id": "concrete_curing_requirements",
+    "title": "Concrete Curing Requirements - IS 456:2000 Section 13",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "curing",
+      "hydration",
+      "IS 456",
+      "curing duration",
+      "curing methods"
+    ],
+    "page": 1,
+    "text": "CONCRETE CURING - IS 456:2000 REQUIREMENTS\nSource: IS 456:2000 Section 13 - Transporting, Placing, Compaction, and Curing of Concrete\n1. PURPOSE OF CURING\nCuring prevents premature drying of concrete and ensures adequate hydration of cement.\nProper curing:\n- Increases compressive strength\n- Reduces permeability\n- Prevents plastic and drying shrinkage cracks\n- Improves surface hardness and abrasion resistance\n2. MINIMUM CURING DURATION (IS 456:2000 Clause 13.5)\nOrdinary Portland Cement (OPC): 7 days minimum\nPortland Pozzolana Cement (PPC): 10 days minimum"
+  },
+  {
+    "chunk_id": 6,
+    "doc_id": "concrete_curing_requirements",
+    "title": "Concrete Curing Requirements - IS 456:2000 Section 13",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "curing",
+      "hydration",
+      "IS 456",
+      "curing duration",
+      "curing methods"
+    ],
+    "page": 1,
+    "text": "Pozzolana Cement (PPC): 10 days minimum\nConcrete with mineral admixtures (fly ash, GGBS): 14 days minimum\nHot weather concreting: 14 days minimum (IS 7861)\nAggressive exposure conditions: 14 days minimum\n3. CURING METHODS\na) Water Curing (Ponding) - Most effective method for flat surfaces\nb) Wet Covering (Jute, Hessian, Wet Sand) - For vertical and inclined surfaces\nc) Sprinkler/Fog Curing - For vertical surfaces in hot weather\nd) Curing Compounds (Chemical Membrane) - Applied after initial set; requires 95% coverage\ne) Steam Curing - Accelerated curing in precast operations\n4."
+  },
+  {
+    "chunk_id": 7,
+    "doc_id": "concrete_curing_requirements",
+    "title": "Concrete Curing Requirements - IS 456:2000 Section 13",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "curing",
+      "hydration",
+      "IS 456",
+      "curing duration",
+      "curing methods"
+    ],
+    "page": 1,
+    "text": "age\ne) Steam Curing - Accelerated curing in precast operations\n4. CURING COMPOUNDS (IS 456:2000 Clause 13.5.2)\nMust comply with IS 12118 (Specification for Curing Compounds for Concrete)\n- Applied at recommended coverage rate (5-8 m2/litre typical)\n- Reapply within 30 minutes if surface not uniformly covered\n- Do not apply in direct sun or high wind conditions\n5. HOT WEATHER PRECAUTIONS (IS 7861 Part 1)\nPlacing temperature should not exceed 38 degrees C\nPrecooling of aggregates and water recommended above 35 degrees C\nProtect freshly placed concrete from direct sun and wind using windbreaks"
+  },
+  {
+    "chunk_id": 8,
+    "doc_id": "concrete_curing_requirements",
+    "title": "Concrete Curing Requirements - IS 456:2000 Section 13",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "curing",
+      "hydration",
+      "IS 456",
+      "curing duration",
+      "curing methods"
+    ],
+    "page": 1,
+    "text": "s C\nProtect freshly placed concrete from direct sun and wind using windbreaks\n6. EFFECT OF INADEQUATE CURING\n<7 days: 20-25% strength reduction vs 28-day design strength\n<3 days: 40-50% strength reduction\nInadequate curing is the primary cause of surface crazing and plastic shrinkage cracking\nReference: IS 456:2000 Section 13; IS 7861 Part 1 Hot Weather Concreting"
+  },
+  {
+    "chunk_id": 9,
+    "doc_id": "concrete_grades_specifications",
+    "title": "Concrete Grades and Specifications - IS 456:2000",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "concrete grade",
+      "M25",
+      "M30",
+      "M35",
+      "M40",
+      "compressive strength"
+    ],
+    "page": 1,
+    "text": "CONCRETE GRADES AND SPECIFICATIONS\nSource: IS 456:2000 Table 2 - Grades of Concrete\n1. GRADE DESIGNATION\nConcrete is designated by the prefix M (Mix) followed by the characteristic compressive strength\nin MPa at 28 days measured on 150mm cubes.\nGrade | fck (MPa) | Application\nM10 | 10 | Plain concrete in lightly loaded structures (floor fill, blinding)\nM15 | 15 | Plain concrete in moderately loaded structures\nM20 | 20 | Minimum grade for reinforced concrete (mild exposure)\nM25 | 25 | RC structures in moderate exposure; foundations"
+  },
+  {
+    "chunk_id": 10,
+    "doc_id": "concrete_grades_specifications",
+    "title": "Concrete Grades and Specifications - IS 456:2000",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "concrete grade",
+      "M25",
+      "M30",
+      "M35",
+      "M40",
+      "compressive strength"
+    ],
+    "page": 1,
+    "text": "ure; foundations\nM30 | 30 | RC structures in severe exposure; water retaining structures\nM35 | 35 | RC structures in very severe exposure; coastal structures\nM40 | 40 | RC structures in extreme exposure; bridge decks, offshore\n2. CHARACTERISTIC STRENGTH\nfck is defined as: Mean Strength (fck') = fck + 1.65 x Standard Deviation\nFor site quality control: Standard deviation typically 4-5 MPa for good site practice\n3. ACCEPTANCE CRITERIA (IS 456:2000 Clause 16)\nIndividual cube strength >= (fck - 4) MPa\nMean of any group of 4 consecutive results >= (fck + 4) MPa"
+  },
+  {
+    "chunk_id": 11,
+    "doc_id": "concrete_grades_specifications",
+    "title": "Concrete Grades and Specifications - IS 456:2000",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "concrete grade",
+      "M25",
+      "M30",
+      "M35",
+      "M40",
+      "compressive strength"
+    ],
+    "page": 1,
+    "text": "of 4 consecutive results >= (fck + 4) MPa\nAll works shut if mean strength < fck\n4. MIX PROPORTIONS (Nominal Mix - IS 456:2000 Table 9)\nGrade | Cement:Sand:Aggregate | W/C (max)\nM15 | 1:2:4 | 0.60\nM20 | 1:1.5:3 | 0.55\nM25 | Design Mix Required | 0.50\nM30+ | Design Mix Required | 0.45\nNote: Nominal mix not permitted for M25 and above. IS 10262 design mix mandatory.\nReference: IS 456:2000 Table 2, Table 9, Clause 16; IS 10262:2019"
+  },
+  {
+    "chunk_id": 12,
+    "doc_id": "concrete_water_cement_ratio",
+    "title": "Water-Cement Ratio in Concrete - IS 456:2000 and Mix Design Principles",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "water cement ratio",
+      "mix design",
+      "IS 456",
+      "concrete quality"
+    ],
+    "page": 1,
+    "text": "WATER-CEMENT RATIO IN CONCRETE\nSource: IS 456:2000 Plain and Reinforced Concrete - Code of Practice\n1. DEFINITION\nThe water-cement (W/C) ratio is defined as the ratio of the mass of water to the mass of cementitious materials in a concrete mix.\n2. SIGNIFICANCE\nThe W/C ratio is the single most important parameter governing the strength and durability of concrete.\nLower W/C ratio produces:\n- Higher compressive strength\n- Lower permeability\n- Greater durability\n- Reduced risk of cracking\nHigher W/C ratio produces:\n- Lower compressive strength\n- Increased porosity and permeability"
+  },
+  {
+    "chunk_id": 13,
+    "doc_id": "concrete_water_cement_ratio",
+    "title": "Water-Cement Ratio in Concrete - IS 456:2000 and Mix Design Principles",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "water cement ratio",
+      "mix design",
+      "IS 456",
+      "concrete quality"
+    ],
+    "page": 1,
+    "text": "ower compressive strength\n- Increased porosity and permeability\n- Reduced durability\n- Increased risk of plastic and drying shrinkage cracking\n3. IS 456:2000 REQUIREMENTS (Table 5 - Minimum Cement Content, Maximum W/C Ratio)\nExposure Condition | Min Cement Content (kg/m3) | Max W/C Ratio | Min Grade\nMild | 300 | 0.55 | M20\nModerate | 300 | 0.50 | M25\nSevere | 320 | 0.45 | M30\nVery Severe | 340 | 0.45 | M35\nExtreme | 360 | 0.40 | M40\n4. EFFECT ON STRENGTH\nDuff Abrams' Law: f_c = A / B^(W/C)\nWhere A and B are empirical constants."
+  },
+  {
+    "chunk_id": 14,
+    "doc_id": "concrete_water_cement_ratio",
+    "title": "Water-Cement Ratio in Concrete - IS 456:2000 and Mix Design Principles",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "concrete",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "water cement ratio",
+      "mix design",
+      "IS 456",
+      "concrete quality"
+    ],
+    "page": 1,
+    "text": "al constants.\nFor OPC concrete: approximately 5-7 MPa strength gain per 0.05 reduction in W/C ratio.\n5. MEASUREMENT ON SITE\nSite water-cement ratio is measured using:\n- Wash-out method (ASTM C1084)\n- Microwave oven method (ASTM C566)\n- Nuclear method for in-place concrete\n6. COMMON SITE DEVIATIONS\n- Water addition on site increases W/C beyond design value\n- Wet aggregates not accounted for in mix water calculation\n- Admixture dosing errors affecting free water content\nReference: IS 456:2000 Section 6, Table 5; IS 10262:2019 Mix Design Guidelines"
+  },
+  {
+    "chunk_id": 15,
+    "doc_id": "cost_overrun_management",
+    "title": "Cost Overrun Causes and Management in Construction",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "cost",
+    "doc_type": "knowledge_text",
+    "pub_year": 2011,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "cost overrun",
+      "budget management",
+      "earned value",
+      "BOQ",
+      "contingency"
+    ],
+    "page": 1,
+    "text": "COST OVERRUN IN CONSTRUCTION PROJECTS\nSource: NPTEL Course - Cost Estimation and Control, IIT Madras\n1. DEFINITION\nCost overrun = Final Cost - Budgeted Cost (at tender)\nExpressed as: % overrun = (Final - Budget) / Budget x 100\nGlobal average overrun: 28% (Oxford Major Project Research)\nIndia infrastructure projects: Average 30-40% overrun (Planning Commission studies)\n2. PRIMARY CAUSES OF COST OVERRUN\nDesign-related (40-50% of all overruns):\n- Design errors discovered during construction\n- Design changes by owner (scope creep)\n- Incomplete design at tender (provisional sums)"
+  },
+  {
+    "chunk_id": 16,
+    "doc_id": "cost_overrun_management",
+    "title": "Cost Overrun Causes and Management in Construction",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "cost",
+    "doc_type": "knowledge_text",
+    "pub_year": 2011,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "cost overrun",
+      "budget management",
+      "earned value",
+      "BOQ",
+      "contingency"
+    ],
+    "page": 1,
+    "text": "scope creep)\n- Incomplete design at tender (provisional sums)\n- Optimistic cost estimating at tender stage\nConstruction-related:\n- Labour and material price escalation\n- Productivity lower than assumed\n- Rework due to quality defects\n- Equipment rental above budget\nExternal factors:\n- Adverse weather\n- Ground conditions worse than geotechnical investigation\n- Utility relocation delays\n- Regulatory changes\n3. EARNED VALUE MANAGEMENT (EVM)\nCost Performance Index (CPI) = Earned Value (EV) / Actual Cost (AC)\nSchedule Performance Index (SPI) = EV / Planned Value (PV)\nInterpretation:"
+  },
+  {
+    "chunk_id": 17,
+    "doc_id": "cost_overrun_management",
+    "title": "Cost Overrun Causes and Management in Construction",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "cost",
+    "doc_type": "knowledge_text",
+    "pub_year": 2011,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "cost overrun",
+      "budget management",
+      "earned value",
+      "BOQ",
+      "contingency"
+    ],
+    "page": 1,
+    "text": "erformance Index (SPI) = EV / Planned Value (PV)\nInterpretation:\nCPI > 1.0: Under budget\nCPI = 1.0: On budget\nCPI < 1.0: Over budget\nForecast:\nEstimate at Completion (EAC) = Budget at Completion / CPI\nIf CPI = 0.85: Project will overrun by 17.6% of budget at completion\n4. CONTINGENCY ALLOWANCE\nRule of thumb contingency for different project phases:\nConcept estimate: 20-30%\nPreliminary design: 15-20%\nDetailed design: 10-15%\nPost-tender: 5-10%\nContingency classification:\nDesign contingency: For design development gaps\nConstruction contingency: For unforeseen site conditions"
+  },
+  {
+    "chunk_id": 18,
+    "doc_id": "cost_overrun_management",
+    "title": "Cost Overrun Causes and Management in Construction",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "cost",
+    "doc_type": "knowledge_text",
+    "pub_year": 2011,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "cost overrun",
+      "budget management",
+      "earned value",
+      "BOQ",
+      "contingency"
+    ],
+    "page": 1,
+    "text": "s\nConstruction contingency: For unforeseen site conditions\nEscalation contingency: Price increases during construction period\n5. BOQ-BASED CONTROL\nMonitor actual quantities vs BOQ quantities monthly.\nFlag items where actual > BOQ by >10% for variation review.\nMaintain running cost report: Committed + Actual + Forecast = Total\nReference: NPTEL 105106115; CPWD DSR 2023; IS 1200 Method of Measurement"
+  },
+  {
+    "chunk_id": 19,
+    "doc_id": "crack_classification_causes",
+    "title": "Classification and Causes of Cracks in Concrete Structures",
+    "source_org": "FHWA / NPTEL IIT Madras",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "crack classification",
+      "plastic shrinkage cracks",
+      "thermal cracks",
+      "structural cracks",
+      "crack causes"
+    ],
+    "page": 1,
+    "text": "CLASSIFICATION AND CAUSES OF CRACKS IN CONCRETE\nSource: NPTEL Course 105106202 - Maintenance and Repair of Concrete Structures, IIT Madras\n1. CLASSIFICATION BY TIMING\nPre-hardening Cracks (occur before 24 hours):\na) Plastic Shrinkage Cracks\nb) Plastic Settlement Cracks\nc) Formwork Movement Cracks\nPost-hardening Cracks (occur after setting):\na) Drying Shrinkage Cracks\nb) Thermal Cracks (early-age heat of hydration)\nc) Chemical Reaction Cracks (AAR, sulfate attack)\nd) Structural Cracks (overloading, settlement)\ne) Corrosion-induced Cracks\n2."
+  },
+  {
+    "chunk_id": 20,
+    "doc_id": "crack_classification_causes",
+    "title": "Classification and Causes of Cracks in Concrete Structures",
+    "source_org": "FHWA / NPTEL IIT Madras",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "crack classification",
+      "plastic shrinkage cracks",
+      "thermal cracks",
+      "structural cracks",
+      "crack causes"
+    ],
+    "page": 1,
+    "text": "rrosion-induced Cracks\n2. PLASTIC SHRINKAGE CRACKS\nOccur within 0-8 hours of casting when rate of evaporation exceeds bleeding rate.\nRisk conditions: Temperature > 30 C, wind speed > 10 km/hr, low humidity < 50%\nTypical appearance: Diagonal surface cracks, 25-75mm deep, 0.1-3mm wide\nPrevention: Wind breaks, shading, fog spraying, curing compound within 20 min of finishing\nIS 456 Reference: Clause 13.1, Annex A\n3. PLASTIC SETTLEMENT CRACKS\nOccur within 1-3 hours over reinforcement or form ties as concrete bleeds and settles."
+  },
+  {
+    "chunk_id": 21,
+    "doc_id": "crack_classification_causes",
+    "title": "Classification and Causes of Cracks in Concrete Structures",
+    "source_org": "FHWA / NPTEL IIT Madras",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "crack classification",
+      "plastic shrinkage cracks",
+      "thermal cracks",
+      "structural cracks",
+      "crack causes"
+    ],
+    "page": 1,
+    "text": "settles.\nRisk: Excessive bleeding in mix, deep sections, congested reinforcement\nPrevention: Revibration 1-2 hours after casting; reduce W/C ratio; proper cover\n4. DRYING SHRINKAGE CRACKS\nOccur weeks to months after casting as concrete dries.\nMagnitude: Unrestrained concrete shrinks 300-600 microstrain on drying\nRestrained concrete develops tensile stresses causing cracking when sigma_t > f_ct\nPrevention: Low W/C ratio (<0.45), adequate curing, proper joint spacing (IS 3414)\n5. STRUCTURAL CRACKS\nDue to applied loads, settlement, or design deficiencies."
+  },
+  {
+    "chunk_id": 22,
+    "doc_id": "crack_classification_causes",
+    "title": "Classification and Causes of Cracks in Concrete Structures",
+    "source_org": "FHWA / NPTEL IIT Madras",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "crack classification",
+      "plastic shrinkage cracks",
+      "thermal cracks",
+      "structural cracks",
+      "crack causes"
+    ],
+    "page": 1,
+    "text": "ds, settlement, or design deficiencies.\nCharacteristics: Aligned with stress trajectories, widths >0.3mm typically critical\nFlexural cracks: Vertical, widest at tension face, narrowest at neutral axis\nShear cracks: Diagonal, 45-60 to beam axis\nIS 456:2000 Clause 35: Maximum permissible crack width 0.3mm (normal exposure)\n6. CRACK WIDTH MEASUREMENT\nHair crack: <0.1mm - typically acceptable\nFine crack: 0.1-0.3mm - monitor; seal in aggressive environments\nMedium crack: 0.3-0.5mm - repair required\nWide crack: >0.5mm - structural investigation mandatory"
+  },
+  {
+    "chunk_id": 23,
+    "doc_id": "crack_classification_causes",
+    "title": "Classification and Causes of Cracks in Concrete Structures",
+    "source_org": "FHWA / NPTEL IIT Madras",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "crack classification",
+      "plastic shrinkage cracks",
+      "thermal cracks",
+      "structural cracks",
+      "crack causes"
+    ],
+    "page": 1,
+    "text": "structural investigation mandatory\nReference: IS 456:2000 Clause 35; BIS SP-24 Explanatory Handbook; FHWA-RD-77-103"
+  },
+  {
+    "chunk_id": 24,
+    "doc_id": "crack_prevention_water_cement",
+    "title": "Crack Prevention Through Water-Cement Ratio Control",
+    "source_org": "CPWD / BIS",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "crack prevention",
+      "W/C ratio control",
+      "evaporation rate",
+      "plastic cracking"
+    ],
+    "page": 1,
+    "text": "CRACK PREVENTION THROUGH MIX AND PLACEMENT CONTROL\nSource: CPWD Specifications 2019 Vol.1, IS 7861 Hot Weather Concreting\n1. EVAPORATION RATE CONTROL\nPlastic shrinkage cracking occurs when evaporation rate exceeds 1.0 kg/m2/hr.\nCritical evaporation rate formula (ACI 305):\nE = (5 x T_c - T_a + 18) - Wind_speed/2\nWhere: T_c = concrete temp ( C), T_a = ambient temp ( C), Wind = km/hr\nRisk Categories:\nE < 0.5 kg/m2/hr : Low risk - standard precautions\nE 0.5-1.0 : Moderate risk - windbreaks, fog mist required\nE > 1.0 : High risk - curing compound within 20 min; stop pour if uncontrolled\n2."
+  },
+  {
+    "chunk_id": 25,
+    "doc_id": "crack_prevention_water_cement",
+    "title": "Crack Prevention Through Water-Cement Ratio Control",
+    "source_org": "CPWD / BIS",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "crack prevention",
+      "W/C ratio control",
+      "evaporation rate",
+      "plastic cracking"
+    ],
+    "page": 1,
+    "text": "High risk - curing compound within 20 min; stop pour if uncontrolled\n2. WATER-CEMENT RATIO EXCEEDANCE EFFECTS ON CRACKING\nW/C Design | W/C Site | Excess | Crack Risk Increase\n0.40 | 0.40 | 0% | Baseline\n0.40 | 0.45 | 12.5% | +25% plastic shrinkage risk\n0.40 | 0.50 | 25% | +60% plastic shrinkage risk; tensile strength reduced ~15%\n0.40 | 0.55 | 37.5% | +120% risk; structural cracking likely under service loads\n3. CURING AND CRACKING RELATIONSHIP\nInadequate curing accelerates drying shrinkage and weakens the concrete surface.\nEffect of curing on crack potential (IS 456 Commentary):"
+  },
+  {
+    "chunk_id": 26,
+    "doc_id": "crack_prevention_water_cement",
+    "title": "Crack Prevention Through Water-Cement Ratio Control",
+    "source_org": "CPWD / BIS",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "crack prevention",
+      "W/C ratio control",
+      "evaporation rate",
+      "plastic cracking"
+    ],
+    "page": 1,
+    "text": "surface.\nEffect of curing on crack potential (IS 456 Commentary):\n14 days curing: Baseline crack risk\n7 days curing: +40% drying shrinkage crack risk\n3 days curing: +100% drying shrinkage crack risk; surface dusting likely\nNo curing: +200% crack risk; significant loss of surface strength\n4. TEMPERATURE EFFECTS\nPlacing temperature vs. strength (IS 7861):\n15-25 C: Optimal. No additional precautions.\n25-30 C: Add ice to mix water; avoid afternoon pours.\n30-35 C: Precool aggregates; limit batch to transport <45 minutes.\n>35 C: Stop pour or use retarder; very high cracking risk.\n5."
+  },
+  {
+    "chunk_id": 27,
+    "doc_id": "crack_prevention_water_cement",
+    "title": "Crack Prevention Through Water-Cement Ratio Control",
+    "source_org": "CPWD / BIS",
+    "domain": "cracks",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "crack prevention",
+      "W/C ratio control",
+      "evaporation rate",
+      "plastic cracking"
+    ],
+    "page": 1,
+    "text": "s.\n>35 C: Stop pour or use retarder; very high cracking risk.\n5. REMEDIAL MEASURES FOR PLASTIC SHRINKAGE CRACKS\nIf cracks appear within 4 hours: Re-vibrate to close (most effective)\nIf cracks appear at 4-8 hours: Tamp with a wooden float while concrete still plastic\nAfter 24 hours: Surface injection with low-viscosity epoxy (IS 13938)\nStructural cracks: Epoxy injection grout (IS 2067) + non-shrink mortar patching\nReference: IS 456:2000 Section 13; IS 7861 Part 1; ACI 305R Hot Weather Concreting"
+  },
+  {
+    "chunk_id": 28,
+    "doc_id": "construction_delay_analysis",
+    "title": "Construction Project Delay Analysis and Causes",
+    "source_org": "NPTEL / IIT Kharagpur",
+    "domain": "delays",
+    "doc_type": "knowledge_text",
+    "pub_year": 2012,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "project delays",
+      "delay analysis",
+      "critical path",
+      "schedule management",
+      "causes of delay"
+    ],
+    "page": 1,
+    "text": "CONSTRUCTION PROJECT DELAY ANALYSIS\nSource: NPTEL Course - Construction Planning and Management, IIT Kharagpur\n1. CLASSIFICATION OF DELAYS\nExcusable Delays (Force Majeure):\n- Unusually severe weather events\n- Acts of God (earthquake, flood)\n- Government actions beyond parties' control\n- Utility strikes\nCompensable Delays (Owner-caused):\n- Late issue of drawings or instructions\n- Design changes during construction\n- Owner-supplied materials delayed\n- Late access to site\nNon-Compensable Delays (Contractor-caused):\n- Labour shortages\n- Equipment breakdown\n- Poor planning or coordination"
+  },
+  {
+    "chunk_id": 29,
+    "doc_id": "construction_delay_analysis",
+    "title": "Construction Project Delay Analysis and Causes",
+    "source_org": "NPTEL / IIT Kharagpur",
+    "domain": "delays",
+    "doc_type": "knowledge_text",
+    "pub_year": 2012,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "project delays",
+      "delay analysis",
+      "critical path",
+      "schedule management",
+      "causes of delay"
+    ],
+    "page": 1,
+    "text": "Labour shortages\n- Equipment breakdown\n- Poor planning or coordination\n- Subcontractor defaults\nConcurrent Delays:\n- Multiple simultaneous delay causes make attribution complex\n- Requires time-impact analysis for resolution\n2. COMMON CAUSES IN INDIAN CONSTRUCTION (Research - IIT Madras)\nRanked by frequency:\n1. Design changes and variations (most common)\n2. Material procurement delays\n3. Labour productivity issues\n4. Site access and land acquisition\n5. Approval delays (municipal, environmental)\n6. Subcontractor coordination failures\n7. Equipment availability\n8. Cash flow / payment delays\n3."
+  },
+  {
+    "chunk_id": 30,
+    "doc_id": "construction_delay_analysis",
+    "title": "Construction Project Delay Analysis and Causes",
+    "source_org": "NPTEL / IIT Kharagpur",
+    "domain": "delays",
+    "doc_type": "knowledge_text",
+    "pub_year": 2012,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "project delays",
+      "delay analysis",
+      "critical path",
+      "schedule management",
+      "causes of delay"
+    ],
+    "page": 1,
+    "text": "dination failures\n7. Equipment availability\n8. Cash flow / payment delays\n3. DELAY ANALYSIS METHODS\na) As-Planned vs. As-Built:\nCompare original Gantt chart with actual completion dates.\nIdentifies overall delay but not specific causes.\nb) Time Impact Analysis (TIA):\nInsert delay events into schedule one at a time.\nAssess impact on critical path.\nMost accurate but time-intensive.\nc) Window Analysis:\nDivide project into time windows.\nAnalyse schedule within each window.\nGood for concurrent delay situations.\n4. CRITICAL PATH METHOD (CPM)"
+  },
+  {
+    "chunk_id": 31,
+    "doc_id": "construction_delay_analysis",
+    "title": "Construction Project Delay Analysis and Causes",
+    "source_org": "NPTEL / IIT Kharagpur",
+    "domain": "delays",
+    "doc_type": "knowledge_text",
+    "pub_year": 2012,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "project delays",
+      "delay analysis",
+      "critical path",
+      "schedule management",
+      "causes of delay"
+    ],
+    "page": 1,
+    "text": "CAL PATH METHOD (CPM)\nActivities on the critical path have zero float - any delay extends project completion.\nFormula: Float = Latest Start - Earliest Start\nCritical path = Path with zero float (or minimum float)\nMonitoring: Update CPM schedule at minimum monthly; weekly for at-risk activities\n5. DELAY DAMAGES\nExtension of Time (EOT): Additional calendar time to complete without penalty\nProlongation Costs: Site overheads during extended period\nLoss and Expense: Additional costs resulting from delay (disruption, loss of productivity)"
+  },
+  {
+    "chunk_id": 32,
+    "doc_id": "construction_delay_analysis",
+    "title": "Construction Project Delay Analysis and Causes",
+    "source_org": "NPTEL / IIT Kharagpur",
+    "domain": "delays",
+    "doc_type": "knowledge_text",
+    "pub_year": 2012,
+    "source_url": "https://nptel.ac.in",
+    "topics": [
+      "project delays",
+      "delay analysis",
+      "critical path",
+      "schedule management",
+      "causes of delay"
+    ],
+    "page": 1,
+    "text": "s of productivity)\nLiquidated Damages (LD): Pre-agreed daily rate for contractor-caused delays (FIDIC, CPWD forms)\n6. PREVENTION STRATEGIES\n- Detailed pre-construction planning (Master programme + 3-week lookaheads)\n- Material procurement logs with lead times tracked\n- Risk register updated monthly\n- Early warning systems in contracts (FIDIC Clause 8.4)\n- Regular progress meetings with action registers\nReference: NPTEL Course 105105098; IS 4736 Construction Management; FIDIC Red Book Clause 8"
+  },
+  {
+    "chunk_id": 33,
+    "doc_id": "honeycombing_causes_prevention",
+    "title": "Honeycombing in Concrete - Causes, Detection, and Remediation",
+    "source_org": "CPWD / FHWA",
+    "domain": "honeycombing",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "honeycombing",
+      "voids",
+      "compaction",
+      "vibration",
+      "concrete defects",
+      "formwork"
+    ],
+    "page": 1,
+    "text": "HONEYCOMBING IN CONCRETE\nSource: CPWD Specifications 2019; FHWA Concrete Defects Guide\n1. DEFINITION\nHoneycombing refers to voids, cavities, or rough porous pockets in hardened concrete\ncaused by the absence of mortar between coarse aggregate particles.\n2. CAUSES\na) Inadequate Vibration:\n- Insufficient vibration radius (typically 300-500mm for 50mm diameter vibrator)\n- Vibrator not inserted at regular intervals (max 500mm centres)\n- Vibration duration too short (<5 seconds per insertion)\n- Vibrator withdrawn too quickly (>5cm/sec withdrawal causes honeycombing)\nb) Poor Mix Design:"
+  },
+  {
+    "chunk_id": 34,
+    "doc_id": "honeycombing_causes_prevention",
+    "title": "Honeycombing in Concrete - Causes, Detection, and Remediation",
+    "source_org": "CPWD / FHWA",
+    "domain": "honeycombing",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "honeycombing",
+      "voids",
+      "compaction",
+      "vibration",
+      "concrete defects",
+      "formwork"
+    ],
+    "page": 1,
+    "text": "ickly (>5cm/sec withdrawal causes honeycombing)\nb) Poor Mix Design:\n- Insufficient fines content (coarse mix with F.M. > 3.0)\n- W/C ratio too low (<0.35 without plasticizers causes stiff mix)\n- Aggregate too large relative to section (max size > 1/4 section thickness)\nc) Poor Formwork:\n- Gaps in formwork joints allowing mortar loss\n- Very rough formwork trapping air pockets\n- Heavily oiled formwork with insufficient absorption\nd) Reinforcement Congestion:\n- Bar spacing < 3x max aggregate size creates honeycombing zones\n- Multiple layers with insufficient concrete cover"
+  },
+  {
+    "chunk_id": 35,
+    "doc_id": "honeycombing_causes_prevention",
+    "title": "Honeycombing in Concrete - Causes, Detection, and Remediation",
+    "source_org": "CPWD / FHWA",
+    "domain": "honeycombing",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "honeycombing",
+      "voids",
+      "compaction",
+      "vibration",
+      "concrete defects",
+      "formwork"
+    ],
+    "page": 1,
+    "text": "ones\n- Multiple layers with insufficient concrete cover\n- Bundled bars without adequate gap for concrete flow\ne) Placing Conditions:\n- Free fall height > 1500mm (segregation)\n- Placing temperature > 35 C (rapid stiffening)\n- Delayed placing (partial set before vibration)\n3. DETECTION METHODS\nVisual inspection: Surface voids, rough texture, exposed aggregate\nHammer sounding (IS 13311 Part 2): Hollow sound indicates subsurface voids\nGround Penetrating Radar: Locates deep voids\nUltrasonic Pulse Velocity (IS 13311 Part 1): Velocity <3500 m/s suggests voids"
+  },
+  {
+    "chunk_id": 36,
+    "doc_id": "honeycombing_causes_prevention",
+    "title": "Honeycombing in Concrete - Causes, Detection, and Remediation",
+    "source_org": "CPWD / FHWA",
+    "domain": "honeycombing",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "honeycombing",
+      "voids",
+      "compaction",
+      "vibration",
+      "concrete defects",
+      "formwork"
+    ],
+    "page": 1,
+    "text": "1): Velocity <3500 m/s suggests voids\nRebound hammer: Low rebound values at void locations\n4. SEVERITY CLASSIFICATION (CPWD)\nMinor: Surface depth < 25mm; area < 0.1 m2 per 1m2 face\nModerate: Depth 25-75mm; area up to 0.3 m2 per 1m2 face\nSevere: Depth > 75mm; structural integrity affected\n5. REMEDIATION (CPWD Chapter 4)\nMinor honeycombing:\n- Chip out loose concrete to solid surface\n- Treat with bonding agent (SBR latex or epoxy)\n- Fill with 1:2 cement:sand mortar or non-shrink grout\n- Cure 7 days\nModerate to severe honeycombing:\n- Core drilling to assess depth (IS 516)"
+  },
+  {
+    "chunk_id": 37,
+    "doc_id": "honeycombing_causes_prevention",
+    "title": "Honeycombing in Concrete - Causes, Detection, and Remediation",
+    "source_org": "CPWD / FHWA",
+    "domain": "honeycombing",
+    "doc_type": "knowledge_text",
+    "pub_year": 2019,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "honeycombing",
+      "voids",
+      "compaction",
+      "vibration",
+      "concrete defects",
+      "formwork"
+    ],
+    "page": 1,
+    "text": "honeycombing:\n- Core drilling to assess depth (IS 516)\n- Remove to solid concrete; form sides with temporary shuttering\n- Fill with proprietary cementitious repair mortar or flowable non-shrink grout\n- Structural assessment required if reinforcement exposed\nStructural concern:\n- Epoxy injection (IS 13938)\n- Full core replacement with high-strength micro-concrete\n- Third-party structural engineer assessment mandatory\nReference: IS 456:2000 Clause 12; IS 13311; CPWD Specifications 2019 Chapter 4"
+  },
+  {
+    "chunk_id": 38,
+    "doc_id": "ndt_concrete_inspection",
+    "title": "Non-Destructive Testing of Concrete Structures",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "inspection",
+    "doc_type": "knowledge_text",
+    "pub_year": 2013,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "NDT",
+      "rebound hammer",
+      "ultrasonic pulse velocity",
+      "concrete testing",
+      "structural assessment"
+    ],
+    "page": 1,
+    "text": "NON-DESTRUCTIVE TESTING OF CONCRETE STRUCTURES\nSource: IS 13311 Part 1 (UPV), IS 13311 Part 2 (Rebound Hammer); NPTEL Construction Materials\n1. REBOUND HAMMER TEST (Schmidt Hammer) - IS 13311 Part 2\nPrinciple: Measures surface hardness related to compressive strength.\nEquipment: Spring-driven metal hammer strikes concrete surface via plunger.\nProcedure:\n- Surface must be smooth, dry, carbonation-free (grind if needed)\n- Take minimum 9 readings per test location (300mm x 300mm area)\n- Average of readings (excluding top and bottom quartile) = Rebound Index (R)"
+  },
+  {
+    "chunk_id": 39,
+    "doc_id": "ndt_concrete_inspection",
+    "title": "Non-Destructive Testing of Concrete Structures",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "inspection",
+    "doc_type": "knowledge_text",
+    "pub_year": 2013,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "NDT",
+      "rebound hammer",
+      "ultrasonic pulse velocity",
+      "concrete testing",
+      "structural assessment"
+    ],
+    "page": 1,
+    "text": "top and bottom quartile) = Rebound Index (R)\n- Calibrate against known cube strengths on same mix\nInterpretation (approximate, for OPC 28-day cured concrete):\nR < 20: Poor concrete, likely < 15 MPa\nR 20-30: Fair concrete, approximately 15-25 MPa\nR 30-40: Good concrete, approximately 25-40 MPa\nR > 40: Very good concrete, > 40 MPa\nLimitations:\n- Surface condition (wet, coated, carbonated) affects results significantly\n- Direction of test affects result (horizontal vs. overhead vs. downward)\n- Cannot assess internal defects\n- Correlation with strength varies by mix; local calibration essential"
+  },
+  {
+    "chunk_id": 40,
+    "doc_id": "ndt_concrete_inspection",
+    "title": "Non-Destructive Testing of Concrete Structures",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "inspection",
+    "doc_type": "knowledge_text",
+    "pub_year": 2013,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "NDT",
+      "rebound hammer",
+      "ultrasonic pulse velocity",
+      "concrete testing",
+      "structural assessment"
+    ],
+    "page": 1,
+    "text": "efects\n- Correlation with strength varies by mix; local calibration essential\n2. ULTRASONIC PULSE VELOCITY (UPV) - IS 13311 Part 1\nPrinciple: Measures velocity of ultrasonic pulses (50-200 kHz) through concrete.\nConfiguration:\n- Direct (transmitter opposite receiver): Most accurate\n- Indirect (both on same face): Less accurate, for one-sided access\n- Semi-direct (90 degrees): Intermediate\nPulse Velocity Quality Classification:\nV > 4500 m/s: Excellent quality\nV 3500-4500: Good quality\nV 3000-3500: Questionable\nV 2000-3000: Poor quality\nV < 2000: Very poor quality; likely voided or cracked"
+  },
+  {
+    "chunk_id": 41,
+    "doc_id": "ndt_concrete_inspection",
+    "title": "Non-Destructive Testing of Concrete Structures",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "inspection",
+    "doc_type": "knowledge_text",
+    "pub_year": 2013,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "NDT",
+      "rebound hammer",
+      "ultrasonic pulse velocity",
+      "concrete testing",
+      "structural assessment"
+    ],
+    "page": 1,
+    "text": "0-3000: Poor quality\nV < 2000: Very poor quality; likely voided or cracked\nApplications:\n- Detect cracks, voids, honeycombing (velocity reduction)\n- Assess uniformity across a structure\n- Monitor strength development\n- Locate delamination in slabs\n3. HALF-CELL POTENTIAL TESTING (ASTM C876)\nFor assessing corrosion activity of reinforcement bars.\nProbability of active corrosion:\nMore negative than -350 mV (CSE): > 90% probability of active corrosion\n-200 to -350 mV: Uncertain zone (50% probability)\nLess negative than -200 mV: < 10% probability of active corrosion\n4."
+  },
+  {
+    "chunk_id": 42,
+    "doc_id": "ndt_concrete_inspection",
+    "title": "Non-Destructive Testing of Concrete Structures",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "inspection",
+    "doc_type": "knowledge_text",
+    "pub_year": 2013,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "NDT",
+      "rebound hammer",
+      "ultrasonic pulse velocity",
+      "concrete testing",
+      "structural assessment"
+    ],
+    "page": 1,
+    "text": "-200 mV: < 10% probability of active corrosion\n4. CARBONATION DEPTH MEASUREMENT\nSpray phenolphthalein indicator on freshly broken concrete surface.\nPink/red coloured zone: pH > 9 (not carbonated, reinforcement protected)\nColourless zone: pH < 9 (carbonated; reinforcement depassivated if steel reached)\nRate of carbonation: approximately k*sqrt(t) mm (where k=2-5mm/yr for OPC)\n5. COVER METER SURVEY (BS 1881 Part 204)\nElectromagnetic cover meter locates reinforcement and measures cover.\nSurvey procedure:\n- Grid scan at 100-200mm centres\n- Record depths and compare against design drawings"
+  },
+  {
+    "chunk_id": 43,
+    "doc_id": "ndt_concrete_inspection",
+    "title": "Non-Destructive Testing of Concrete Structures",
+    "source_org": "Bureau of Indian Standards / NPTEL",
+    "domain": "inspection",
+    "doc_type": "knowledge_text",
+    "pub_year": 2013,
+    "source_url": "https://bis.gov.in",
+    "topics": [
+      "NDT",
+      "rebound hammer",
+      "ultrasonic pulse velocity",
+      "concrete testing",
+      "structural assessment"
+    ],
+    "page": 1,
+    "text": "at 100-200mm centres\n- Record depths and compare against design drawings\n- Identify zones with insufficient cover\nReference: IS 13311 Part 1, Part 2; IS 516; CPWD QA Manual 2022"
+  },
+  {
+    "chunk_id": 44,
+    "doc_id": "material_management_concrete",
+    "title": "Material Management for Concrete Construction",
+    "source_org": "CPWD / NPTEL",
+    "domain": "material_management",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "cement storage",
+      "aggregate stockpiling",
+      "material testing",
+      "procurement",
+      "inventory"
+    ],
+    "page": 1,
+    "text": "MATERIAL MANAGEMENT FOR CONCRETE CONSTRUCTION\nSource: CPWD Specifications 2019; IS 4082 Recommendations for Stacking of Materials\n1. CEMENT MANAGEMENT\nStorage requirements (IS 4082):\n- Store in weatherproof godown on raised platform (200mm above ground)\n- Maximum stack height: 10 bags (1500kg/m2 floor load)\n- First In First Out (FIFO) rotation mandatory\n- Cement older than 3 months must be retested before use\n- Do not store within 300mm of external walls\nAcceptance testing on delivery:\n- Physical: Check bag weight (50 1kg), no hard lumps, free flow"
+  },
+  {
+    "chunk_id": 45,
+    "doc_id": "material_management_concrete",
+    "title": "Material Management for Concrete Construction",
+    "source_org": "CPWD / NPTEL",
+    "domain": "material_management",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "cement storage",
+      "aggregate stockpiling",
+      "material testing",
+      "procurement",
+      "inventory"
+    ],
+    "page": 1,
+    "text": "(50 1kg), no hard lumps, free flow\n- Setting time (IS 4031 Part 5): Initial > 30 min, Final < 600 min\n- Compressive strength at 3 days (IS 4031 Part 6): OPC 53 Grade > 27 MPa\n- Reject if any test fails; issue NCR (Non-Conformance Report)\n2. AGGREGATE MANAGEMENT\nStockpiling (IS 4082 Section 4):\n- Separate stockpiles for each aggregate size and source\n- Height limit: 3m for coarse, 2m for fine (to avoid segregation)\n- Minimum clear distance between stockpiles: 1500mm\n- Exclude contaminated or mixed materials\nMoisture monitoring:\n- Fine aggregate moisture critical for free W/C control"
+  },
+  {
+    "chunk_id": 46,
+    "doc_id": "material_management_concrete",
+    "title": "Material Management for Concrete Construction",
+    "source_org": "CPWD / NPTEL",
+    "domain": "material_management",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "cement storage",
+      "aggregate stockpiling",
+      "material testing",
+      "procurement",
+      "inventory"
+    ],
+    "page": 1,
+    "text": "monitoring:\n- Fine aggregate moisture critical for free W/C control\n- Test moisture content (IS 2386 Part 3) before every batch when visual appearance changes\n- Typical moisture: 3-7% in FA; 0-2% in CA\n3. ADMIXTURE MANAGEMENT\n- Store per manufacturer guidelines (typically 5-35 C; away from freezing)\n- Check expiry date; re-test if stored more than shelf life\n- Plastic jerry cans not reusable between different admixtures (contamination)\n- Record lot number and batch reference for every delivery\n4. REINFORCEMENT STEEL MANAGEMENT"
+  },
+  {
+    "chunk_id": 47,
+    "doc_id": "material_management_concrete",
+    "title": "Material Management for Concrete Construction",
+    "source_org": "CPWD / NPTEL",
+    "domain": "material_management",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "cement storage",
+      "aggregate stockpiling",
+      "material testing",
+      "procurement",
+      "inventory"
+    ],
+    "page": 1,
+    "text": "EL MANAGEMENT\n- Store off ground on timber sleepers (avoid soil contact - corrosion)\n- Segregate by diameter, grade, and mill mark\n- Protect from rain and damp with tarpaulin for projects exceeding 3 months\n- Mill test certificates (MTC) must match delivery (heat number, diameter, grade)\n- Acceptance testing: IS 1786 - Tensile test, Bend test per specified bar diameter\n5. WASTE MINIMISATION\nConcrete wastage targets:\nAcceptable loss at site: 2-3% for slabs; 3-5% for columns and walls\nExcess order allowance: 2-5% over calculated volume"
+  },
+  {
+    "chunk_id": 48,
+    "doc_id": "material_management_concrete",
+    "title": "Material Management for Concrete Construction",
+    "source_org": "CPWD / NPTEL",
+    "domain": "material_management",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "cement storage",
+      "aggregate stockpiling",
+      "material testing",
+      "procurement",
+      "inventory"
+    ],
+    "page": 1,
+    "text": "r calculated volume\nMonitoring: Record delivery dockets vs poured volume; investigate >5% variance\nReference: IS 4082 Stacking and Storage; CPWD Specifications 2019 Chapter 2; IS 1786:2008"
+  },
+  {
+    "chunk_id": 49,
+    "doc_id": "quality_assurance_construction",
+    "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "quality",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "QA QC",
+      "quality assurance",
+      "inspection checklist",
+      "concrete testing",
+      "cube test"
+    ],
+    "page": 1,
+    "text": "QUALITY ASSURANCE IN CONCRETE CONSTRUCTION\nSource: CPWD Quality Assurance Manual 2022; IS 456:2000 Section 16\n1. QUALITY CONTROL PLAN COMPONENTS\na) Pre-construction: Material testing, mix design approval, equipment calibration\nb) During construction: Incoming material testing, in-process checks, cube sampling\nc) Post-construction: Core tests, NDT, cover meter survey\n2. MATERIAL TESTING FREQUENCIES (IS 456:2000 Table 1)\nMaterial | Test | Frequency\nCement | Setting time, strength, soundness | Per consignment or 50T, whichever is less"
+  },
+  {
+    "chunk_id": 50,
+    "doc_id": "quality_assurance_construction",
+    "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "quality",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "QA QC",
+      "quality assurance",
+      "inspection checklist",
+      "concrete testing",
+      "cube test"
+    ],
+    "page": 1,
+    "text": "whichever is less\nFine Aggregate | Grading, FM, moisture | Every 100 m3 or change in source\nCoarse Aggregate| Grading, flakiness, Los Angeles | Every 100 m3 or change in source\nWater | pH, TDS, chloride | At commencement and after any source change\nAdmixtures | Compatibility, dose | Per batch; re-test if stored >6 months\n3. CONCRETE CUBE TESTING (IS 516:2018)\nSampling: Minimum 6 cubes per 50 m3 or per day's pour (whichever more)\nCube size: 150mm x 150mm x 150mm\nCompaction: 2 layers, 25 blows each (tamping rod) or vibration\nCuring: 24hr at site, then in water at 27 2 C until testing"
+  },
+  {
+    "chunk_id": 51,
+    "doc_id": "quality_assurance_construction",
+    "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "quality",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "QA QC",
+      "quality assurance",
+      "inspection checklist",
+      "concrete testing",
+      "cube test"
+    ],
+    "page": 1,
+    "text": "ibration\nCuring: 24hr at site, then in water at 27 2 C until testing\nTesting age: 7 day (indicative) and 28 day (acceptance)\nAcceptance:\n- Individual cube >= (fck - 4) MPa\n- Mean of 4 consecutive >= (fck + 4) MPa\n- Failure: Structural investigation and possible concrete removal (IS 456 Clause 16.4)\n4. SLUMP TESTING (IS 1199:2018)\nTarget slumps by consistency class:\nS1: 10-40mm (stiff, mass concrete)\nS2: 50-90mm (standard reinforced concrete)\nS3: 100-150mm (complex/congested reinforcement)\nS4: 160-210mm (very fluid, self-compacting approaches)\nS5: >220mm (self-compacting concrete)"
+  },
+  {
+    "chunk_id": 52,
+    "doc_id": "quality_assurance_construction",
+    "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "quality",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "QA QC",
+      "quality assurance",
+      "inspection checklist",
+      "concrete testing",
+      "cube test"
+    ],
+    "page": 1,
+    "text": "self-compacting approaches)\nS5: >220mm (self-compacting concrete)\nSite control: Reject concrete if slump exceeds design value by more than +25mm (water addition suspected)\n5. COVER TO REINFORCEMENT (IS 456:2000 Clause 26.4)\nExposure | Cover (mm)\nMild | 20 (slabs), 30 (beams/columns)\nModerate | 30 (slabs), 40 (beams/columns)\nSevere | 45\nVery Severe | 50\nExtreme | 75\n6. SITE INSPECTION CHECKLIST (CPWD QA Manual 2022)\nPre-pour:\n[ ] Reinforcement cover checks (cover meter + physical gauges)\n[ ] Formwork stability and tightness\n[ ] Conduits and inserts positioned correctly"
+  },
+  {
+    "chunk_id": 53,
+    "doc_id": "quality_assurance_construction",
+    "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "quality",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "QA QC",
+      "quality assurance",
+      "inspection checklist",
+      "concrete testing",
+      "cube test"
+    ],
+    "page": 1,
+    "text": "tightness\n[ ] Conduits and inserts positioned correctly\n[ ] Starter bars/dowels for next lift secured\n[ ] Concrete ordering confirmed (grade, slump, volume)\nDuring pour:\n[ ] Slump test at point of delivery\n[ ] Cube samples taken per IS 516\n[ ] Temperature check (max 38 C at placing)\n[ ] Vibration coverage (every 500mm centers)\nAfter pour:\n[ ] Curing start time recorded (<30 min for curing compound)\n[ ] Cure duration monitored (minimum 14 days for PPC/admixture mixes)\n[ ] Cube test results logged and signed off\nReference: IS 456:2000 Section 16; IS 516:2018; CPWD QA Manual 2022"
+  },
+  {
+    "chunk_id": 54,
+    "doc_id": "quality_assurance_construction",
+    "title": "Quality Assurance in Construction - IS 456 and CPWD Framework",
+    "source_org": "CPWD / Bureau of Indian Standards",
+    "domain": "quality",
+    "doc_type": "knowledge_text",
+    "pub_year": 2022,
+    "source_url": "https://cpwd.gov.in",
+    "topics": [
+      "QA QC",
+      "quality assurance",
+      "inspection checklist",
+      "concrete testing",
+      "cube test"
+    ],
+    "page": 1,
+    "text": "rence: IS 456:2000 Section 16; IS 516:2018; CPWD QA Manual 2022"
+  },
+  {
+    "chunk_id": 55,
+    "doc_id": "construction_failure_analysis",
+    "title": "Construction Failure Modes and Root Cause Analysis",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "reports",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "failure analysis",
+      "root cause",
+      "structural failure",
+      "quality defects",
+      "lessons learned"
+    ],
+    "page": 1,
+    "text": "CONSTRUCTION FAILURE MODES AND ROOT CAUSE ANALYSIS\nSource: NPTEL Maintenance and Repair of Concrete Structures, IIT Madras\n1. COMMON CONCRETE STRUCTURE FAILURES\nCategory A: Design Deficiencies\n- Insufficient flexural reinforcement (under-reinforced sections)\n- Inadequate shear links (diagonal tension failure)\n- Poor structural detailing at connections\n- Punching shear in flat slabs without shear heads\nCategory B: Material Deficiencies\n- Substandard cement (slow setting, low strength)\n- Alkali-reactive aggregates without mitigation\n- Contaminated water (chloride, sulphate)"
+  },
+  {
+    "chunk_id": 56,
+    "doc_id": "construction_failure_analysis",
+    "title": "Construction Failure Modes and Root Cause Analysis",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "reports",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "failure analysis",
+      "root cause",
+      "structural failure",
+      "quality defects",
+      "lessons learned"
+    ],
+    "page": 1,
+    "text": "thout mitigation\n- Contaminated water (chloride, sulphate)\n- Counterfeit reinforcement steel (substandard yield strength)\nCategory C: Construction Deficiencies\n- Excessive water addition at batching or site (most common)\n- Inadequate compaction (honeycombing, voids)\n- Insufficient cover (chloride ingress; corrosion)\n- Inadequate curing (low strength, plastic cracking)\n- Premature form striking (deflection, cracks)\nCategory D: In-Service Loading Failures\n- Overloading beyond design (floor loadings, storage)\n- Lateral loads from adjacent excavation\n- Differential settlement"
+  },
+  {
+    "chunk_id": 57,
+    "doc_id": "construction_failure_analysis",
+    "title": "Construction Failure Modes and Root Cause Analysis",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "reports",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "failure analysis",
+      "root cause",
+      "structural failure",
+      "quality defects",
+      "lessons learned"
+    ],
+    "page": 1,
+    "text": "l loads from adjacent excavation\n- Differential settlement\n- Fire damage (spalling, strength reduction)\n2. ROOT CAUSE ANALYSIS PROCESS\nStep 1: Evidence Collection\n- Photographic documentation of all defects\n- Sampling of concrete cores, reinforcement bars\n- Review of site records (pour cards, cube results, delivery dockets)\n- Witness statements\nStep 2: Failure Mode Identification\n- Pattern analysis of crack locations\n- UPV and rebound hammer mapping\n- Core analysis (carbonation, chloride profile, mix analysis)\nStep 3: Cause Determination\nUse 5-Why Analysis:"
+  },
+  {
+    "chunk_id": 58,
+    "doc_id": "construction_failure_analysis",
+    "title": "Construction Failure Modes and Root Cause Analysis",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "reports",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "failure analysis",
+      "root cause",
+      "structural failure",
+      "quality defects",
+      "lessons learned"
+    ],
+    "page": 1,
+    "text": "3: Cause Determination\nUse 5-Why Analysis:\nWhy did the beam fail? -> Low concrete strength\nWhy low strength? -> High water-cement ratio\nWhy high W/C? -> Water added on site\nWhy water added? -> Concrete too stiff on delivery\nWhy too stiff? -> Long transit time + high temperature\nStep 4: Remedial Action\nImmediate: Shore up structure if unsafe\nShort-term: Repair defective concrete\nLong-term: System improvement (site controls, supervision, testing)\n3. CASE STUDY: PLASTIC SHRINKAGE CRACK FAILURE\nProject: Large industrial floor slab, poured in hot season"
+  },
+  {
+    "chunk_id": 59,
+    "doc_id": "construction_failure_analysis",
+    "title": "Construction Failure Modes and Root Cause Analysis",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "reports",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "failure analysis",
+      "root cause",
+      "structural failure",
+      "quality defects",
+      "lessons learned"
+    ],
+    "page": 1,
+    "text": "al floor slab, poured in hot season\nDefect: Extensive map cracking within 4 hours of pour\nRoot causes:\n- Temperature: 38 C ambient, concrete placed at 35 C\n- Wind: 15 km/hr exposed site (no windbreaks erected)\n- Relative humidity: 28% (dry desert climate)\n- Evaporation rate: Calculated 1.8 kg/m2/hr (High risk threshold: 1.0)\n- No curing compound applied until 2 hours after finishing\nCorrections implemented:\n- Wind breaks erected on all exposed boundaries\n- Curing compound applied within 20 minutes of finishing\n- Retarder added to reduce plastic cracking window"
+  },
+  {
+    "chunk_id": 60,
+    "doc_id": "construction_failure_analysis",
+    "title": "Construction Failure Modes and Root Cause Analysis",
+    "source_org": "NPTEL / IIT Madras",
+    "domain": "reports",
+    "doc_type": "knowledge_text",
+    "pub_year": 2015,
+    "source_url": "https://nptel.ac.in/courses/105106202",
+    "topics": [
+      "failure analysis",
+      "root cause",
+      "structural failure",
+      "quality defects",
+      "lessons learned"
+    ],
+    "page": 1,
+    "text": "tarder added to reduce plastic cracking window\n- Evening pours only for large areas in summer\n4. QUALITY FAILURE INVESTIGATION REPORT STRUCTURE\nExecutive Summary\nSite Observations\nReview of Records\nSampling and Testing Plan\nLaboratory Results\nAnalysis and Root Cause\nClassification of Defects\nRecommendations for Remediation\nCost Estimate for Repairs\nResponsibility Assessment\nReference: NPTEL 105106202; IS 456:2000 Appendix B; CPWD Failure Investigation Manual"
+  },
+  {
+    "chunk_id": 61,
+    "doc_id": "construction_safety_concrete_work",
+    "title": "Construction Safety for Concrete Placing Operations",
+    "source_org": "OSHA / National Building Code Part 7",
+    "domain": "safety",
+    "doc_type": "knowledge_text",
+    "pub_year": 2020,
+    "source_url": "https://www.osha.gov",
+    "topics": [
+      "concrete safety",
+      "formwork collapse",
+      "PPE",
+      "fall protection",
+      "hazardous conditions"
+    ],
+    "page": 1,
+    "text": "SAFETY IN CONCRETE CONSTRUCTION\nSource: NBC 2016 Part 7; OSHA 1926 Subpart Q; IS 3696\n1. FORMWORK SAFETY\nFormwork must be designed by a qualified structural engineer for:\n- Weight of fresh concrete (typically 24-25 kN/m3)\n- Live loads (workers, equipment, vibration): minimum 2.4 kN/m2 additional\n- Impact loads from concrete pump or skip\n- Lateral pressure from placing height > 1.5m\nCritical checks before pour:\n- Propping centres and sizes (typically props at max 1.0-1.2m centres for 200mm slabs)\n- Ledger to standard connections secured"
+  },
+  {
+    "chunk_id": 62,
+    "doc_id": "construction_safety_concrete_work",
+    "title": "Construction Safety for Concrete Placing Operations",
+    "source_org": "OSHA / National Building Code Part 7",
+    "domain": "safety",
+    "doc_type": "knowledge_text",
+    "pub_year": 2020,
+    "source_url": "https://www.osha.gov",
+    "topics": [
+      "concrete safety",
+      "formwork collapse",
+      "PPE",
+      "fall protection",
+      "hazardous conditions"
+    ],
+    "page": 1,
+    "text": "d connections secured\n- Base plates bearing on firm ground (not soft or waterlogged)\n- No stripping before structural strength achieved (usually 3-7 days slab soffit)\nFormwork failures are a leading cause of construction fatalities.\n2. PERSONAL PROTECTIVE EQUIPMENT (PPE) FOR CONCRETE WORK\n- Hard hat: At all times on site (IS 2925)\n- Safety boots (steel toecap + slip resistant): Mandatory during pour\n- Chemical resistant gloves: Concrete is alkaline (pH 12-13); prolonged contact causes burns\n- Eye protection: Splashing during pour, pump priming\n- High visibility vest: Near mobile plant"
+  },
+  {
+    "chunk_id": 63,
+    "doc_id": "construction_safety_concrete_work",
+    "title": "Construction Safety for Concrete Placing Operations",
+    "source_org": "OSHA / National Building Code Part 7",
+    "domain": "safety",
+    "doc_type": "knowledge_text",
+    "pub_year": 2020,
+    "source_url": "https://www.osha.gov",
+    "topics": [
+      "concrete safety",
+      "formwork collapse",
+      "PPE",
+      "fall protection",
+      "hazardous conditions"
+    ],
+    "page": 1,
+    "text": "ing during pour, pump priming\n- High visibility vest: Near mobile plant\n- Hearing protection: During extended mechanical vibration use (>85 dB)\n3. CONCRETE PUMP SAFETY\n- Pump line pressure can exceed 100 bar; never break under pressure\n- Cleaning out (pigging): Standpipe must be secured; release pressure first\n- Never stand in line of fire of cleaning plug\n- Ground anchors for pump outriggers on all soft ground\n4. CHEMICAL HAZARDS\nFresh cement and concrete contain calcium hydroxide (strongly alkaline).\nWet cement causes cement dermatitis (delayed burns) with prolonged skin contact."
+  },
+  {
+    "chunk_id": 64,
+    "doc_id": "construction_safety_concrete_work",
+    "title": "Construction Safety for Concrete Placing Operations",
+    "source_org": "OSHA / National Building Code Part 7",
+    "domain": "safety",
+    "doc_type": "knowledge_text",
+    "pub_year": 2020,
+    "source_url": "https://www.osha.gov",
+    "topics": [
+      "concrete safety",
+      "formwork collapse",
+      "PPE",
+      "fall protection",
+      "hazardous conditions"
+    ],
+    "page": 1,
+    "text": "auses cement dermatitis (delayed burns) with prolonged skin contact.\nFirst aid: Remove contaminated clothing; rinse with clean water for 20 minutes.\nHexavalent chromium in Portland cement is a skin sensitiser (COSHH consideration in UK/EU standards).\n5. WORKING AT HEIGHT DURING CONCRETE OPERATIONS\nFalls are the largest single cause of deaths in construction.\nNBC Part 7 requires:\n- Edge protection (guardrail + mid-rail + kickboard) for any work platform > 1.8m\n- Safety harness when edge protection cannot be provided\n- Nets below formwork striking at height\n6."
+  },
+  {
+    "chunk_id": 65,
+    "doc_id": "construction_safety_concrete_work",
+    "title": "Construction Safety for Concrete Placing Operations",
+    "source_org": "OSHA / National Building Code Part 7",
+    "domain": "safety",
+    "doc_type": "knowledge_text",
+    "pub_year": 2020,
+    "source_url": "https://www.osha.gov",
+    "topics": [
+      "concrete safety",
+      "formwork collapse",
+      "PPE",
+      "fall protection",
+      "hazardous conditions"
+    ],
+    "page": 1,
+    "text": "- Nets below formwork striking at height\n6. HOT WEATHER HEALTH RISKS\nConcrete work in high temperature:\n- Heat exhaustion: Move to shade, cool fluids, rest\n- Heat stroke: Medical emergency; call ambulance\nPrecautions: Schedule heavy work in early morning; provide cool water; rotate workers\nReference: NBC 2016 Part 7; OSHA 1926 Subpart Q Concrete; IS 3696 Part 1 Scaffolding Safety"
+  },
+  {
+    "chunk_id": 66,
+    "doc_id": "is_456_key_provisions",
+    "title": "IS 456:2000 - Key Provisions for Plain and Reinforced Concrete",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "standards",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://standardsbis.bsbedge.com",
+    "topics": [
+      "IS 456",
+      "concrete standard",
+      "reinforced concrete",
+      "structural design",
+      "India standard"
+    ],
+    "page": 1,
+    "text": "IS 456:2000 PLAIN AND REINFORCED CONCRETE - KEY PROVISIONS\nSource: Bureau of Indian Standards IS 456:2000 (Fourth Revision)\n1. SCOPE\nIS 456:2000 covers the structural use of plain and reinforced concrete for general building construction.\nIt specifies requirements for materials, mix design, construction practices, and structural design.\nApplies to: Buildings, retaining walls, foundations, water-retaining structures (with IS 3370)\n2. EXPOSURE CATEGORIES AND CONCRETE SPECIFICATION (TABLE 3)\nCategory | Environment | Min Grade | Max W/C | Min Cover"
+  },
+  {
+    "chunk_id": 67,
+    "doc_id": "is_456_key_provisions",
+    "title": "IS 456:2000 - Key Provisions for Plain and Reinforced Concrete",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "standards",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://standardsbis.bsbedge.com",
+    "topics": [
+      "IS 456",
+      "concrete standard",
+      "reinforced concrete",
+      "structural design",
+      "India standard"
+    ],
+    "page": 1,
+    "text": "in Grade | Max W/C | Min Cover\nMild | Protected from weather | M20 | 0.55 | 20mm (slab)\nModerate | Humid, slight aggress. | M25 | 0.50 | 30mm\nSevere | Cyclic wet/dry, sea air | M30 | 0.45 | 45mm\nVery Severe| Tidal, deicing salts | M35 | 0.45 | 50mm\nExtreme | Sea water immersion | M40 | 0.40 | 75mm\n3. STRUCTURAL DESIGN REQUIREMENTS\nLoad factors (Limit State of Collapse):\nDL + LL: gamma_DL = 1.5, gamma_LL = 1.5\nDL + WL/EL: gamma_DL = 0.9 (when DL stabilising), 1.2 otherwise\nCombined: 1.2 (DL + LL + WL)\nMaterial partial safety factors:"
+  },
+  {
+    "chunk_id": 68,
+    "doc_id": "is_456_key_provisions",
+    "title": "IS 456:2000 - Key Provisions for Plain and Reinforced Concrete",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "standards",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://standardsbis.bsbedge.com",
+    "topics": [
+      "IS 456",
+      "concrete standard",
+      "reinforced concrete",
+      "structural design",
+      "India standard"
+    ],
+    "page": 1,
+    "text": "al safety factors:\nConcrete: gamma_c = 1.5 (design strength = 0.67 fck / 1.5 = 0.45 fck)\nSteel: gamma_s = 1.15 (design yield strength = 0.87 fy)\n4. MINIMUM REINFORCEMENT\nMinimum tension reinforcement in beams: 0.85 bd / fy (Clause 26.5.1.1)\nMinimum main reinforcement in slabs: 0.12% (HYSD), 0.15% (mild steel)\nMinimum stirrup spacing: Smaller of d/2, 300mm\nMinimum column reinforcement: 0.8% of gross cross-section area\nMaximum column reinforcement: 6% (4% at lap locations)\n5. DURABILITY REQUIREMENTS\nChloride content in concrete: Max 0.4% by mass of cement (reinforced concrete)"
+  },
+  {
+    "chunk_id": 69,
+    "doc_id": "is_456_key_provisions",
+    "title": "IS 456:2000 - Key Provisions for Plain and Reinforced Concrete",
+    "source_org": "Bureau of Indian Standards",
+    "domain": "standards",
+    "doc_type": "knowledge_text",
+    "pub_year": 2000,
+    "source_url": "https://standardsbis.bsbedge.com",
+    "topics": [
+      "IS 456",
+      "concrete standard",
+      "reinforced concrete",
+      "structural design",
+      "India standard"
+    ],
+    "page": 1,
+    "text": "in concrete: Max 0.4% by mass of cement (reinforced concrete)\nSulphate content (SO3): Max 4% by mass of cement\nAlkali-Silica Reaction (ASR): Use low-alkali cement (<0.6% Na2O equivalent) with reactive aggregates\n6. INSPECTION AND TESTING\nFresh concrete: Slump test, temperature, cube sampling (IS 516)\nHardened concrete: Cube tests at 7 and 28 days; core tests if cubes fail\nCover survey: Electromagnetic cover meter survey after striking formwork\nAcceptance: Refer IS 456:2000 Section 16\nReference: IS 456:2000 (Complete); SP 24:1983 IS 456 Explanatory Handbook"
+  }
+]
