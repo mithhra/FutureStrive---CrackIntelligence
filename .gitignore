@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Large model / data files — not tracked in git (too large)
+*.joblib
+*.pkl
+*.h5
+*.pt
+*.bin
+synthetic_crack_dataset.csv
+
+# Vector store indices (regenerate with run_pipeline.py)
+vector_store/index.faiss
+vector_store/chunk_metadata.json
+
+# Knowledge base raw text (seeded by seed_knowledge_base.py)
+knowledge_base/
+
+# Logs / reports
+knowledge_pipeline/download_log.json
+knowledge_pipeline/gap_report.json
+
+# Screenshots used only locally
+shot_*.png
+
+# Streamlit runtime
+.streamlit/secrets.toml
+
+# IDE / OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+*.swp
+
+# Agents config (local only)
+.agents/
+
+# Misc scripts not needed for deployment
+retrain_cost_model.py
+generate_pdf.py
+fix_synth.py
+
+patch_defect_type.py
+synthetic_defect_dataset.csv
