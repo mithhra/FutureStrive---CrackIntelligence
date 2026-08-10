@@ -248,7 +248,7 @@ for i in range(num_rows):
 df = pd.DataFrame(data)
 
 # Save to CSV
-csv_path = r"c:\Construction Intelligence\Prototype\synthetic_crack_dataset.csv"
+csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "synthetic_crack_dataset.csv")
 df.to_csv(csv_path, index=False)
 print(f"Dataset generated successfully at: {csv_path}")
 print(f"Rows: {df.shape[0]}, Columns: {df.shape[1]}")

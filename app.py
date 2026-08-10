@@ -6,6 +6,7 @@ import re
 import altair as alt
 import datetime
 from pathlib import Path
+APP_DIR = Path(__file__).resolve().parent
 
 # ─── RAG Engine ───────────────────────────────────────────────────────────────
 RAG_INDEX_FILE = Path("vector_store/index.faiss")
@@ -249,39 +250,126 @@ elif nav == "Crack Intelligence":
 
     with col_form:
         st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
-        st.subheader("Pour Parameters")
-
-        with st.expander("Concrete Mix Properties", expanded=True):
-            grade    = st.selectbox("Concrete Grade", ["M25","M30","M35","M40"], index=2, key="c_grade")
-            cem_type = st.selectbox("Cement Type", ["OPC 43 Grade","OPC 53 Grade","PPC","PSC"], index=1, key="c_cemtype")
-            adm_type = st.selectbox("Admixture", ["No Admixture","Naphthalene-based superplasticiser","Polycarboxylate-based superplasticiser"], key="c_adm")
-            wc_des   = st.slider("W/C Ratio (Design)", 0.35, 0.60, 0.40, 0.01, key="c_wcdes")
-            wc_act   = st.slider("W/C Ratio (Actual)", 0.35, 0.65, 0.45, 0.01, key="c_wcact")
-            wc_tol   = st.number_input("W/C Tolerance Spec", value=0.45, step=0.01, key="c_wctol")
-            slump    = st.number_input("Target Slump (mm)", value=100, key="c_slump")
-            agg_size = st.selectbox("Max Aggregate Size (mm)", [10, 20], index=1, key="c_agg")
-
-        with st.expander("Curing & Execution", expanded=False):
-            cur_meth = st.selectbox("Curing Method", ["Ponding","Sprinkling","Wet burlap curing","Curing compound"], key="c_curmeth")
-            cur_plan = st.number_input("Planned Curing (days)", value=14, key="c_curplan")
-            cur_act  = st.slider("Actual Curing (days)", 1, 28, 8, key="c_curact")
-            cur_spec = st.number_input("Spec Min Curing (days)", value=14, key="c_curspec")
-            pour_mo  = st.selectbox("Pour Month", ["January","February","March","April","May","June","July","August","September","October","November","December"], key="c_pourmo")
-            chk      = st.slider("Checklist Sign-off Ratio", 0.0, 1.0, 1.0, key="c_chk")
-            temp     = st.slider("Placing Temperature (C)", 10, 50, 34, key="c_temp")
-            hum      = st.slider("Relative Humidity (%)", 10, 100, 40, key="c_hum")
-
-        with st.expander("Site & Environment", expanded=False):
-            wind       = st.selectbox("Wind Exposure", ["Sheltered","Normal","Exposed"], index=1, key="c_wind")
-            shrink_risk= st.selectbox("Shrinkage Risk Season", ["LOW","MEDIUM","HIGH"], index=1, key="c_shrink")
-            site_env   = st.selectbox("Site Environment", ["Inland","Coastal","Industrial"], key="c_env")
-            city       = st.selectbox("City", ["Mumbai","Bangalore","Hyderabad","Delhi","Chennai"], key="c_city")
-            access     = st.selectbox("Accessibility", ["Open","Semi-enclosed","Enclosed"], key="c_access")
-            tier       = st.selectbox("Project Tier", ["Class A","Class B","Class C"], key="c_tier")
-            sim_elems  = st.number_input("Similar Elements Count", value=10, key="c_simelems")
-
-        run_crack = st.button("Run Crack Prediction", use_container_width=True, key="run_crack")
+        st.subheader("Pour Parameters Upload")
+        st.markdown("Download the CSV template, fill in the concrete pour parameters, and upload it below to run predictions.")
+        
+        # Download Template
+        template_csv = (
+            "concrete_grade,water_cement_ratio_design,water_cement_ratio_actual,cement_type,admixture_type,"
+            "target_slump_mm,workability_test_type,max_aggregate_size_mm,planned_pour_month,curing_method,"
+            "planned_curing_duration_days,actual_curing_duration_days,spec_min_curing_days,wc_ratio_tolerance_spec,"
+            "pre_pour_checklist_signed_off_ratio,shrinkage_risk_season,wind_exposure_category,site_environment,"
+            "accessibility,city,project_tier,count_similar_elements,placing_temperature_c,relative_humidity_pct\\n"
+            "M35,0.40,0.425,OPC 53 Grade,Polycarboxylate-based superplasticiser,"
+            "160,Slump (IS 1199),20,March,Curing compound,"
+            "10,5,10,0.02,0.70,MEDIUM,Normal,Inland,Enclosed,Bangalore,Class A,8,34,40\\n"
+        )
+        st.download_button(
+            "Download CSV Template",
+            data=template_csv,
+            file_name="pour_log_template.csv",
+            mime="text/csv",
+            key="download_template"
+        )
+        
+        uploaded_file = st.file_uploader("Upload Pour Log (CSV or Excel)", type=["csv", "xlsx"], key="pour_uploader")
         st.markdown("</div>", unsafe_allow_html=True)
+        
+        run_crack = False
+        if uploaded_file is not None:
+            try:
+                if uploaded_file.name.endswith(".csv"):
+                    df_uploaded = pd.read_csv(uploaded_file)
+                else:
+                    df_uploaded = pd.read_excel(uploaded_file)
+                
+                required_cols = [
+                    "concrete_grade", "water_cement_ratio_design", "water_cement_ratio_actual", "cement_type",
+                    "admixture_type", "target_slump_mm", "workability_test_type", "max_aggregate_size_mm",
+                    "planned_pour_month", "curing_method", "planned_curing_duration_days",
+                    "actual_curing_duration_days", "spec_min_curing_days", "wc_ratio_tolerance_spec",
+                    "pre_pour_checklist_signed_off_ratio", "shrinkage_risk_season", "wind_exposure_category",
+                    "site_environment", "accessibility", "city", "project_tier", "count_similar_elements"
+                ]
+                
+                missing_cols = [col for col in required_cols if col not in df_uploaded.columns]
+                if missing_cols:
+                    st.error(f"Missing columns in template: {', '.join(missing_cols)}")
+                else:
+                    st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
+                    st.success(f"Successfully loaded {len(df_uploaded)} records.")
+                    
+                    if len(df_uploaded) > 1:
+                        selected_idx = st.selectbox(
+                            "Select record to analyze in detail",
+                            options=range(len(df_uploaded)),
+                            format_func=lambda x: f"Record #{x+1} - Grade {df_uploaded.loc[x, 'concrete_grade']} / Curing {df_uploaded.loc[x, 'actual_curing_duration_days']} days"
+                        )
+                    else:
+                        selected_idx = 0
+                    
+                    st.button("Run Prediction", use_container_width=True, key="run_crack_btn")
+                    
+                    # Extract values
+                    row = df_uploaded.iloc[selected_idx]
+                    grade = row["concrete_grade"]
+                    wc_des = row["water_cement_ratio_design"]
+                    wc_act = row["water_cement_ratio_actual"]
+                    cem_type = row["cement_type"]
+                    adm_type = row["admixture_type"]
+                    slump = row["target_slump_mm"]
+                    workability_test_type = row["workability_test_type"]
+                    agg_size = row["max_aggregate_size_mm"]
+                    pour_mo = row["planned_pour_month"]
+                    cur_meth = row["curing_method"]
+                    cur_plan = row["planned_curing_duration_days"]
+                    cur_act = row["actual_curing_duration_days"]
+                    cur_spec = row["spec_min_curing_days"]
+                    wc_tol = row["wc_ratio_tolerance_spec"]
+                    chk = row["pre_pour_checklist_signed_off_ratio"]
+                    wind = row["wind_exposure_category"]
+                    shrink_risk = row["shrinkage_risk_season"]
+                    site_env = row["site_environment"]
+                    access = row["accessibility"]
+                    city = row["city"]
+                    tier = row["project_tier"]
+                    sim_elems = row["count_similar_elements"]
+                    
+                    # Optional variables
+                    temp = row.get("placing_temperature_c", 34)
+                    hum = row.get("relative_humidity_pct", 40)
+                    
+                    run_crack = True
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                    # Display batch summary
+                    if len(df_uploaded) > 1:
+                        st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
+                        st.markdown("### Batch Prediction Summary")
+                        summary_rows = []
+                        occ_model  = joblib.load(APP_DIR / "crack_occurrence_model.joblib")
+                        sev_model  = joblib.load(APP_DIR / "crack_severity_model.joblib")
+                        type_model = joblib.load(APP_DIR / "crack_type_model.joblib")
+                        
+                        for i, r in df_uploaded.iterrows():
+                            r_feat = {col: r[col] for col in required_cols}
+                            r_df = pd.DataFrame([r_feat])
+                            
+                            p = float(occ_model.predict_proba(r_df)[0][1])
+                            s = str(sev_model.predict(r_df)[0]) if p >= 0.25 else "None (Low Risk)"
+                            t = str(type_model.predict(r_df)[0]) if p >= 0.25 else "None (Low Risk)"
+                            
+                            summary_rows.append({
+                                "Record": f"Record #{i+1}",
+                                "Probability": f"{p*100:.1f}%",
+                                "Severity": s,
+                                "Type": t
+                            })
+                        st.dataframe(pd.DataFrame(summary_rows), use_container_width=True, hide_index=True)
+                        st.markdown("</div>", unsafe_allow_html=True)
+            except Exception as e:
+                st.error(f"Error reading file: {e}")
+                run_crack = False
 
     with col_results:
         if run_crack:
@@ -289,6 +377,7 @@ elif nav == "Crack Intelligence":
                 "concrete_grade": grade, "water_cement_ratio_design": wc_des,
                 "water_cement_ratio_actual": wc_act, "cement_type": cem_type,
                 "admixture_type": adm_type, "target_slump_mm": slump,
+                "workability_test_type": workability_test_type,
                 "max_aggregate_size_mm": agg_size, "planned_pour_month": pour_mo,
                 "curing_method": cur_meth, "planned_curing_duration_days": cur_plan,
                 "actual_curing_duration_days": cur_act, "spec_min_curing_days": cur_spec,
@@ -300,9 +389,9 @@ elif nav == "Crack Intelligence":
             features_df = pd.DataFrame([feat_dict])
 
             try:
-                occ_model  = joblib.load("crack_occurrence_model.joblib")
-                sev_model  = joblib.load("crack_severity_model.joblib")
-                type_model = joblib.load("crack_type_model.joblib")
+                occ_model  = joblib.load(APP_DIR / "crack_occurrence_model.joblib")
+                sev_model  = joblib.load(APP_DIR / "crack_severity_model.joblib")
+                type_model = joblib.load(APP_DIR / "crack_type_model.joblib")
                 occ_prob   = float(occ_model.predict_proba(features_df)[0][1])
                 sev_label  = str(sev_model.predict(features_df)[0])
                 type_label = str(type_model.predict(features_df)[0])
@@ -418,13 +507,11 @@ elif nav == "Crack Intelligence":
 
         else:
             st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
-            st.info("Configure parameters on the left and click **Run Crack Prediction** to see the full analysis dashboard.")
+            st.info("Please upload a completed Pour Log template on the left to see the analysis dashboard.")
             st.markdown("</div>", unsafe_allow_html=True)
 
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# DEFECT VOLUME INTELLIGENCE
-# ═══════════════════════════════════════════════════════════════════════════════
+    
+    
 elif nav == "Defect Volume":
     if st.button("← Back to Home", key="defect_back"):
         st.session_state.nav_selection = "Home"
@@ -436,47 +523,165 @@ elif nav == "Defect Volume":
 
     with col_form:
         st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
-        st.subheader("Project Parameters")
-
-        with st.expander("Project & Trade Profile", expanded=True):
-            proj_type   = st.selectbox("Project Type", ["Residential","Commercial","Industrial","Infrastructure"], key="d_proj")
-            gfa         = st.selectbox("GFA (sqm)", [5000,10000,20000,40000,80000], index=2, key="d_gfa")
-            floors      = st.selectbox("Total Floors", [5,10,15,20,30,40], index=2, key="d_floors")
-            struct_sys  = st.selectbox("Structural System", ["RCC Frame","Shear Wall","Flat Slab","Steel Frame"], key="d_struct")
-            subcon      = st.selectbox("Subcontractor Class", ["Class A","Class B","Class C"], index=1, key="d_subcon")
-            past_dr     = st.slider("Past Defect Rate per Floor", 0.5, 10.0, 3.0, 0.1, key="d_pastdr")
-            workforce   = st.number_input("Workforce Size", value=80, key="d_wf")
-            skill_r     = st.slider("Skill Ratio", 0.30, 0.95, 0.70, 0.01, key="d_skill")
-            eng_exp     = st.number_input("Site Engineer Experience (yrs)", value=5, key="d_engexp")
-
-        with st.expander("Activity & Progress", expanded=False):
-            stage       = st.selectbox("Construction Stage", ["Foundation","Substructure","Superstructure","MEP Rough-in","Finishes","Facade"], index=2, key="d_stage")
-            spi_val     = st.slider("SPI (Schedule Performance Index)", 0.60, 1.20, 1.00, 0.01, key="d_spi")
-            conc_act    = st.number_input("Concurrent Activities", value=4, key="d_concact")
-            prior_rw    = st.selectbox("Prior Rework on Same Element", ["No","Yes"], key="d_priorrw")
-            qc_comp     = st.slider("QC Hold Point Compliance (%)", 0.40, 1.00, 0.80, 0.01, key="d_qccomp")
-            third_party = st.selectbox("Third-Party Inspection", ["No","Yes"], key="d_tp")
-
-        with st.expander("Material & Site", expanded=False):
-            mat_grade   = st.selectbox("Material Grade", ["M25","M30","M35","M40"], index=1, key="d_matgrade")
-            appr_sup    = st.selectbox("Approved Supplier", ["Yes","No"], key="d_appsup")
-            del_var     = st.number_input("Delivery Variance (days)", value=0, key="d_delvar")
-            test_cert   = st.selectbox("Test Certificate Status", ["Pass","Fail","Pending"], key="d_testcert")
-            stor_cond   = st.selectbox("Site Storage Condition", ["Good","Fair","Poor"], key="d_stor")
-            non_prod    = st.number_input("Non-Productive Days", value=0, key="d_nonprod")
-
-        with st.expander("Historical QA/QC", expanded=False):
-            defects_td  = st.number_input("Defects Recorded to Date", value=20, key="d_deftd")
-            def_rate_cur= st.slider("Defect Rate (current project)", 0.5, 10.0, 3.0, 0.1, key="d_defratecur")
-            top_def_t   = st.selectbox("Top Defect Type", ["Concrete Defects","Waterproofing","MEP Installation","Tiling/Finishing","Structural"], key="d_topdef")
-            def_close   = st.slider("Defect Closure Rate (%)", 0.30, 1.00, 0.70, 0.01, key="d_defclose")
-            port_avg    = st.slider("Portfolio Avg Defect Rate", 1.5, 5.0, 3.0, 0.1, key="d_portavg")
-
-        run_defect = st.button("Run Defect Prediction", use_container_width=True, key="run_defect")
+        st.subheader("Defect Parameters Upload")
+        st.markdown("Download the CSV template, fill in the project and site parameters, and upload it below to run predictions.")
+        
+        # Download Template
+        defect_template_csv = (
+            "project_type,gfa_sqm,total_floors,structural_system,subcontractor_class,past_defect_rate_per_floor,"
+            "workforce_size,skill_ratio,site_engineer_experience_yrs,construction_stage,spi,concurrent_activities,"
+            "prior_rework_same_element,qc_hold_point_compliance_pct,third_party_inspection,material_grade,approved_supplier,"
+            "delivery_variance_days,test_certificate_status,site_storage_condition,non_productive_days,defects_recorded_to_date,"
+            "defect_rate_current_project,top_defect_type_1,defect_closure_rate_pct,portfolio_avg_defect_rate\\n"
+            "Residential,20000,15,Shear Wall,Class B,3.0,80,0.70,5,Superstructure,1.00,4,No,0.80,No,M30,Yes,0,Pass,Good,0,20,3.0,Concrete Defects,0.70,3.0\\n"
+        )
+        st.download_button(
+            "Download CSV Template",
+            data=defect_template_csv,
+            file_name="defect_log_template.csv",
+            mime="text/csv",
+            key="download_defect_template"
+        )
+        
+        uploaded_file = st.file_uploader("Upload Defect Log (CSV or Excel)", type=["csv", "xlsx"], key="defect_uploader")
         st.markdown("</div>", unsafe_allow_html=True)
+        
+        run_defect = False
+        if uploaded_file is not None:
+            try:
+                if uploaded_file.name.endswith(".csv"):
+                    df_uploaded = pd.read_csv(uploaded_file)
+                else:
+                    df_uploaded = pd.read_excel(uploaded_file)
+                
+                required_cols = [
+                    "project_type", "gfa_sqm", "total_floors", "structural_system", "subcontractor_class",
+                    "past_defect_rate_per_floor", "workforce_size", "skill_ratio", "site_engineer_experience_yrs",
+                    "construction_stage", "spi", "concurrent_activities", "prior_rework_same_element",
+                    "qc_hold_point_compliance_pct", "third_party_inspection", "material_grade", "approved_supplier",
+                    "delivery_variance_days", "test_certificate_status", "site_storage_condition", "non_productive_days",
+                    "defects_recorded_to_date", "defect_rate_current_project", "top_defect_type_1",
+                    "defect_closure_rate_pct", "portfolio_avg_defect_rate"
+                ]
+                
+                missing_cols = [col for col in required_cols if col not in df_uploaded.columns]
+                if missing_cols:
+                    st.error(f"Missing columns in template: {', '.join(missing_cols)}")
+                else:
+                    st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
+                    st.success(f"Successfully loaded {len(df_uploaded)} records.")
+                    
+                    if len(df_uploaded) > 1:
+                        selected_idx = st.selectbox(
+                            "Select record to analyze in detail",
+                            options=range(len(df_uploaded)),
+                            format_func=lambda x: f"Record #{x+1} - Type {df_uploaded.loc[x, 'project_type']} / Stage {df_uploaded.loc[x, 'construction_stage']}"
+                        )
+                    else:
+                        selected_idx = 0
+                    
+                    st.button("Run Prediction", use_container_width=True, key="run_defect_btn")
+                    
+                    # Extract values
+                    row = df_uploaded.iloc[selected_idx]
+                    proj_type = row["project_type"]
+                    gfa = row["gfa_sqm"]
+                    floors = row["total_floors"]
+                    struct_sys = row["structural_system"]
+                    subcon = row["subcontractor_class"]
+                    past_dr = row["past_defect_rate_per_floor"]
+                    workforce = row["workforce_size"]
+                    skill_r = row["skill_ratio"]
+                    eng_exp = row["site_engineer_experience_yrs"]
+                    stage = row["construction_stage"]
+                    spi_val = row["spi"]
+                    conc_act = row["concurrent_activities"]
+                    prior_rw = row["prior_rework_same_element"]
+                    qc_comp = row["qc_hold_point_compliance_pct"]
+                    third_party = row["third_party_inspection"]
+                    mat_grade = row["material_grade"]
+                    appr_sup = row["approved_supplier"]
+                    del_var = row["delivery_variance_days"]
+                    test_cert = row["test_certificate_status"]
+                    stor_cond = row["site_storage_condition"]
+                    non_prod = row["non_productive_days"]
+                    defects_td = row["defects_recorded_to_date"]
+                    def_rate_cur = row["defect_rate_current_project"]
+                    top_def_t = row["top_defect_type_1"]
+                    def_close = row["defect_closure_rate_pct"]
+                    port_avg = row["portfolio_avg_defect_rate"]
+                    
+                    run_defect = True
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                    # Display batch summary
+                    if len(df_uploaded) > 1:
+                        st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
+                        st.markdown("### Batch Prediction Summary")
+                        summary_rows = []
+                        cnt_model  = joblib.load(APP_DIR / "defect_count_model.joblib")
+                        type_model = joblib.load(APP_DIR / "defect_type_model.joblib")
+                        sev_model  = joblib.load(APP_DIR / "defect_severity_model.joblib")
+                        rc_model   = joblib.load(APP_DIR / "defect_rootcause_model.joblib")
+                        
+                        type_le = type_model.label_encoder_
+                        sev_le = sev_model.label_encoder_
+                        rc_le = rc_model.label_encoder_
+                        
+                        for i, r in df_uploaded.iterrows():
+                            # Map binary categorical columns to 1 or 0
+                            prior_rw_val = 1 if r["prior_rework_same_element"] == "Yes" else 0
+                            third_party_val = 1 if r["third_party_inspection"] == "Yes" else 0
+                            appr_sup_val = 1 if r["approved_supplier"] == "Yes" else 0
+                            
+                            r_feat = {
+                                "project_type": r["project_type"], "gfa_sqm": r["gfa_sqm"], "total_floors": r["total_floors"],
+                                "structural_system": r["structural_system"], "subcontractor_class": r["subcontractor_class"],
+                                "past_defect_rate_per_floor": r["past_defect_rate_per_floor"], "workforce_size": r["workforce_size"],
+                                "skill_ratio": r["skill_ratio"], "site_engineer_experience_yrs": r["site_engineer_experience_yrs"],
+                                "construction_stage": r["construction_stage"], "spi": r["spi"],
+                                "concurrent_activities": r["concurrent_activities"],
+                                "prior_rework_same_element": prior_rw_val,
+                                "qc_hold_point_compliance_pct": r["qc_hold_point_compliance_pct"],
+                                "third_party_inspection": third_party_val,
+                                "material_grade": r["material_grade"],
+                                "approved_supplier": appr_sup_val,
+                                "delivery_variance_days": r["delivery_variance_days"],
+                                "test_certificate_status": r["test_certificate_status"],
+                                "site_storage_condition": r["site_storage_condition"],
+                                "non_productive_days": r["non_productive_days"],
+                                "defects_recorded_to_date": r["defects_recorded_to_date"],
+                                "defect_rate_current_project": r["defect_rate_current_project"],
+                                "top_defect_type_1": r["top_defect_type_1"],
+                                "defect_closure_rate_pct": r["defect_closure_rate_pct"],
+                                "portfolio_avg_defect_rate": r["portfolio_avg_defect_rate"]
+                            }
+                            r_df = pd.DataFrame([r_feat])
+                            
+                            p_cnt = int(round(float(cnt_model.predict(r_df)[0])))
+                            p_type = type_le.inverse_transform(type_model.predict(r_df))[0]
+                            p_sev = sev_le.inverse_transform(sev_model.predict(r_df))[0]
+                            p_rc = rc_le.inverse_transform(rc_model.predict(r_df))[0]
+                            
+                            summary_rows.append({
+                                "Record": f"Record #{i+1}",
+                                "Predicted Defect Count": p_cnt,
+                                "Dominant Type": p_type,
+                                "Severity Grade": p_sev,
+                                "Root Cause": p_rc
+                            })
+                        st.dataframe(pd.DataFrame(summary_rows), use_container_width=True, hide_index=True)
+                        st.markdown("</div>", unsafe_allow_html=True)
+            except Exception as e:
+                st.error(f"Error reading file: {e}")
+                run_defect = False
 
     with col_results:
         if run_defect:
+            prior_rw_mapped = 1 if prior_rw == "Yes" else 0
+            third_party_mapped = 1 if third_party == "Yes" else 0
+            appr_sup_mapped = 1 if appr_sup == "Yes" else 0
+            
             feat_dict = {
                 "project_type": proj_type, "gfa_sqm": gfa, "total_floors": floors,
                 "structural_system": struct_sys, "subcontractor_class": subcon,
@@ -484,11 +689,11 @@ elif nav == "Defect Volume":
                 "skill_ratio": skill_r, "site_engineer_experience_yrs": eng_exp,
                 "construction_stage": stage, "spi": spi_val,
                 "concurrent_activities": conc_act,
-                "prior_rework_same_element": 1 if prior_rw == "Yes" else 0,
+                "prior_rework_same_element": prior_rw_mapped,
                 "qc_hold_point_compliance_pct": qc_comp,
-                "third_party_inspection": 1 if third_party == "Yes" else 0,
+                "third_party_inspection": third_party_mapped,
                 "material_grade": mat_grade,
-                "approved_supplier": 1 if appr_sup == "Yes" else 0,
+                "approved_supplier": appr_sup_mapped,
                 "delivery_variance_days": del_var,
                 "test_certificate_status": test_cert,
                 "site_storage_condition": stor_cond,
@@ -502,10 +707,10 @@ elif nav == "Defect Volume":
             features_df = pd.DataFrame([feat_dict])
 
             try:
-                cnt_model  = joblib.load("defect_count_model.joblib")
-                type_model = joblib.load("defect_type_model.joblib")
-                sev_model  = joblib.load("defect_severity_model.joblib")
-                rc_model   = joblib.load("defect_rootcause_model.joblib")
+                cnt_model  = joblib.load(APP_DIR / "defect_count_model.joblib")
+                type_model = joblib.load(APP_DIR / "defect_type_model.joblib")
+                sev_model  = joblib.load(APP_DIR / "defect_severity_model.joblib")
+                rc_model   = joblib.load(APP_DIR / "defect_rootcause_model.joblib")
 
                 pred_count   = int(round(float(cnt_model.predict(features_df)[0])))
                 type_le      = type_model.label_encoder_
@@ -525,10 +730,10 @@ elif nav == "Defect Volume":
                 "subcontractor_class": subcon, "past_defect_rate_per_floor": past_dr,
                 "skill_ratio": skill_r, "qc_hold_point_compliance_pct": qc_comp,
                 "spi": spi_val, "non_productive_days": non_prod,
-                "approved_supplier": 1 if appr_sup=="Yes" else 0,
+                "approved_supplier": appr_sup_mapped,
                 "test_certificate_status": test_cert,
                 "construction_stage": stage,
-                "third_party_inspection": 1 if third_party=="Yes" else 0,
+                "third_party_inspection": third_party_mapped,
                 "last_defect_prediction": {
                     "count": pred_count, "type": pred_type,
                     "severity": pred_sev, "root_cause": pred_rc
@@ -645,13 +850,11 @@ elif nav == "Defect Volume":
 
         else:
             st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
-            st.info("Configure parameters on the left and click **Run Defect Prediction** to see the full analysis dashboard.")
+            st.info("Please upload a completed Defect Log template on the left to see the analysis dashboard.")
             st.markdown("</div>", unsafe_allow_html=True)
 
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# PREDICTION HISTORY
-# ═══════════════════════════════════════════════════════════════════════════════
+    
+    
 elif nav == "Prediction History":
     st.title("Prediction History")
 

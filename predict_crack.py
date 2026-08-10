@@ -4,7 +4,7 @@ import joblib
 import os
 
 # Define the model paths
-model_dir = r"c:\Construction Intelligence\Prototype"
+model_dir = os.path.dirname(os.path.abspath(__file__))
 model_paths = {
     'occurrence': os.path.join(model_dir, 'crack_occurrence_model.joblib'),
     'type': os.path.join(model_dir, 'crack_type_model.joblib'),
@@ -76,6 +76,7 @@ high_risk_input = {
     'cement_type': 'OPC 53 Grade',
     'admixture_type': 'Polycarboxylate-based superplasticiser',
     'target_slump_mm': 120,
+    'workability_test_type': 'Slump (IS 1199)',
     'max_aggregate_size_mm': 20,
     'planned_pour_month': 'June',
     'curing_method': 'Wet burlap curing',
@@ -108,6 +109,7 @@ good_practice_input = {
     'cement_type': 'PPC',
     'admixture_type': 'Polycarboxylate-based superplasticiser',
     'target_slump_mm': 100,
+    'workability_test_type': 'Slump (IS 1199)',
     'max_aggregate_size_mm': 20,
     'planned_pour_month': 'January',
     'curing_method': 'Wet burlap curing',

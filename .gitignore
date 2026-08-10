@@ -54,3 +54,5 @@ fix_synth.py
 
 patch_defect_type.py
 synthetic_defect_dataset.csv
+
+streamlit_console.log

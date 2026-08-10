@@ -7,7 +7,7 @@ import torch
 import streamlit as st
 
 # Path to PDF
-PDF_PATH = r"c:\Construction Intelligence\Prototype\Construction Intelligence Platform_ML Predictions.pdf"
+PDF_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Construction Intelligence Platform_ML Predictions.pdf")
 
 @st.cache_resource
 def load_rag_documents():
