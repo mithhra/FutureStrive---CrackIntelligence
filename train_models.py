@@ -12,8 +12,8 @@ from xgboost import XGBClassifier
 
 from model_utils import XGBoostLabelClassifier
 
-# Set workspace directory
-PROJECT_DIR = r"d:\FutureStrive\crack_pred_with real dataset"
+# Set workspace directory dynamically
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(PROJECT_DIR, "L&T_defect_dataset_processed_row.csv")
 if not os.path.exists(csv_path):
     raise FileNotFoundError(f"Dataset not found at {csv_path}. Run process_defect_data.py first.")

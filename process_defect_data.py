@@ -1,139 +1,162 @@
 import pandas as pd
 import numpy as np
 import os
+import zipfile
 
-workspace_dir = r"d:\FutureStrive\crack_pred_with real dataset"
-orig_path = os.path.join(workspace_dir, "L&T_defect_dataset_consolidated.csv")
-row_level_path = os.path.join(workspace_dir, "L&T_defect_dataset_processed_row.csv")
-grouped_path = os.path.join(workspace_dir, "L&T_defect_dataset_processed_grouped.csv")
+# Set workspace directory dynamically
+workspace_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Load original dataset
-df = pd.read_csv(orig_path)
+# Define input paths (check for variant filenames)
+xlsx_name = "defect_dataset_T3_F26_consolidated (1).xlsx"
+zip_name = "defect_images (2).zip"
 
-# --- STEP 1: CALCULATE QUALITY SCORE FOR SIMULATING NEGATIVE SAMPLES ---
-# Fill NaNs temporarily for scoring
-df['checklist_filled'] = df['pre_pour_checklist_signed_off_ratio'].fillna(df['pre_pour_checklist_signed_off_ratio'].median())
-df['actual_curing_filled'] = df['actual_curing_duration_days'].fillna(df['actual_curing_duration_days'].median())
-df['actual_wc_filled'] = df['water_cement_ratio_actual'].fillna(df['water_cement_ratio_actual'].median())
-df['design_wc_filled'] = df['water_cement_ratio_design'].fillna(df['water_cement_ratio_design'].median())
+xlsx_path = os.path.join(workspace_dir, "dataset", xlsx_name)
+if not os.path.exists(xlsx_path):
+    xlsx_path = os.path.join(workspace_dir, "dataset", "defect_dataset_T3_F26_consolidated.xlsx")
 
-# Checklist score (higher is better, range [0, 1])
-df['checklist_score'] = df['checklist_filled']
+zip_path = os.path.join(workspace_dir, "dataset", zip_name)
+if not os.path.exists(zip_path):
+    zip_path = os.path.join(workspace_dir, "dataset", "defect_images.zip")
 
-# Curing score: actual / spec (higher is better, capped at 1.0)
-df['curing_score'] = (df['actual_curing_filled'] / df['spec_min_curing_days']).clip(upper=1.0)
+print(f"Loading Excel dataset from: {xlsx_path}")
+print(f"Loading Zip archive from: {zip_path}")
 
-# W/C score: design / actual (higher is better, capped at 1.0)
-df['wc_score'] = (df['design_wc_filled'] / df['actual_wc_filled']).clip(upper=1.0)
+# Load positive samples (Excel)
+df_excel = pd.read_excel(xlsx_path)
+print(f"Excel shape: {df_excel.shape}")
 
-# Total Construction Quality Score
-df['quality_score'] = df['checklist_score'] + df['curing_score'] + df['wc_score']
+# Read all image names in zip
+with zipfile.ZipFile(zip_path, 'r') as z:
+    zip_images = sorted([name for name in z.namelist() if name.lower().endswith(('.jpg', '.jpeg', '.png'))])
 
-# Sort and select top 20 rows as negative samples (No Defect)
-top_20_indices = df.sort_values(by='quality_score', ascending=False).head(20).index
+excel_images = set(df_excel['defect_image'].dropna())
+no_crack_images = sorted(list(set(zip_images) - excel_images))
+print(f"Total zip images: {len(zip_images)}")
+print(f"Excel images: {len(excel_images)}")
+print(f"No crack (zip-only) images: {len(no_crack_images)}")
 
-# --- STEP 2: DEFECT TYPE, SEVERITY, AND ROOT CAUSE MAPPING ---
-def get_defect_type(row):
-    cat = str(row['defect_category']).lower()
-    super_cat = str(row['defect_super_category']).lower()
+# --- PROCESS POSITIVE SAMPLES (CONCRETE CRACKS) ---
+df_pos = df_excel.copy()
+
+# Add ID and Metadata columns
+df_pos['defect_id'] = [f"DEF-T3F26-{i:03d}" for i in range(1, len(df_pos) + 1)]
+df_pos['site_id'] = 'SW-T3'
+df_pos['project_name'] = 'Tower 3 Floor 26'
+df_pos['defect_super_category'] = 'Structural Concrete'
+df_pos['defect_category'] = 'Concrete Cracks'
+
+# Assign element_type based on curing_method
+def get_element_type(curing):
+    if 'vertical' in str(curing).lower() or 'wrap' in str(curing).lower():
+        return 'Wall'
+    return 'Slab'
+
+df_pos['element_type'] = df_pos['curing_method'].apply(get_element_type)
+df_pos['floor_level'] = 'Floor 26'
+df_pos['mix_recipe_code'] = 'M30_SCC_RECIPE'
+df_pos['mix_design_source'] = 'T3_F26_MIX_DESIGN.xlsx'
+df_pos['workability_test_type'] = 'Slump flow (SCC)'
+df_pos['label_source'] = 'confirmed_defect'
+
+# Targets
+df_pos['defect_occurred'] = 1
+df_pos['defect_type'] = df_pos.apply(
+    lambda r: 'Settlement' if 'Restricted' in str(r['accessibility'])
+    else ('Shrinkage' if r['wind_exposure_category'] == 'High'
+          else ('Structural' if r['wind_exposure_category'] == 'Moderate' else 'Hairline')),
+    axis=1
+)
+
+df_pos['severity'] = df_pos.apply(
+    lambda r: 'Critical' if ('Restricted' in str(r['accessibility']) and r['wind_exposure_category'] == 'High')
+    else ('Severe' if r['wind_exposure_category'] == 'High'
+          else ('Moderate' if r['wind_exposure_category'] == 'Moderate' else 'Minor')),
+    axis=1
+)
+
+df_pos['root_cause'] = df_pos.apply(
+    lambda r: 'Poor curing' if 'sprinkling' in str(r['curing_method']).lower()
+    else ('QC non-compliance' if 'compound' in str(r['curing_method']).lower() else 'High W/C'),
+    axis=1
+)
+
+# --- PROCESS NEGATIVE SAMPLES (NO CRACK) ---
+# For negative samples, we choose parameters representing low-risk environments and high-quality construction.
+neg_rows = []
+for i, img in enumerate(no_crack_images):
+    # Set features to represent low-risk (no crack)
+    # Wind exposure is mostly Low (75%) or Moderate (25%), never High
+    wind = 'Low' if (i % 4 != 0) else 'Moderate'
     
-    if 'crack' in cat or 'crack' in super_cat:
-        return 'Crack'
-    elif 'honeycomb' in cat or 'honeycomb' in super_cat:
-        return 'Honeycombing'
-    elif 'spall' in cat or 'spall' in super_cat:
-        return 'Spalling'
-    elif 'seepage' in cat or 'leak' in cat or 'waterproof' in super_cat:
-        return 'Leakage'
-    elif 'corrosion' in cat or 'rust' in cat or 'corros' in super_cat:
-        return 'Corrosion'
-    elif 'reinforcement' in cat or 'reinforcement' in super_cat:
-        return 'Reinforcement Defect'
-    elif 'geometry' in super_cat or 'alignment' in super_cat or 'offset' in cat or 'plumb' in cat or 'deviation' in cat or 'square' in cat:
-        return 'Geometry & Alignment Defect'
-    elif 'finish' in super_cat or 'surface' in cat or 'holes' in cat or 'cleaning' in cat:
-        return 'Surface Finish Defect'
-    elif 'formwork' in super_cat or 'deshuttering' in super_cat or 'formwork' in cat or 'deshuttering' in cat:
-        return 'Formwork & Deshuttering Defect'
-    elif 'masonry' in super_cat or 'blockwork' in cat or 'mullion' in cat:
-        return 'Masonry Defect'
-    else:
-        return 'Other Defect'
-
-def get_severity(row):
-    cat = str(row['defect_category']).lower()
-    super_cat = str(row['defect_super_category']).lower()
+    # Accessibility is mostly Open (90%)
+    access = 'Open (internal room; finished floor plate)' if (i % 10 != 0) else 'Open (internal room; adjacent to external opening)'
     
-    # 1. Explicitly major
-    if 'major' in cat:
-        return 'Major'
-    elif 'minor' in cat:
-        return 'Minor'
+    # Curing method is ponding or wet wraps (high quality methods)
+    curing_meth = 'Ponding on top surface; formwork retention on soffit' if (i % 2 == 0) else 'Curing compound + wet hessian wrap (external face)'
     
-    # 2. Heuristics for physical significance
-    # Structural, reinforcement exposure, waterproofing seepage, or support safety issues -> Major
-    if super_cat in ['structural concrete', 'reinforcement', 'waterproofing', 'temporary works & safety']:
-        return 'Major'
-    # Finish, housekeeping, masonry blockwork -> Minor
-    elif super_cat in ['concrete surface finish', 'housekeeping & workmanship', 'finishes', 'masonry']:
-        return 'Minor'
-    # Default geometry/alignment deviations -> Moderate
-    else:
-        return 'Moderate'
-
-def get_root_cause(row):
-    # Calculate QC deviations
-    wc_dev = max(0.0, row['actual_wc_filled'] - row['design_wc_filled'])
-    curing_shortfall = max(0.0, row['spec_min_curing_days'] - row['actual_curing_filled'])
-    qc_shortfall = max(0.0, 0.85 - row['checklist_filled'])
+    # Planned curing duration is 14 days (fully compliant)
+    plan_curing = 14
     
-    # Find the maximum driver
-    penalties = {'High W/C': wc_dev * 100.0, 'Poor curing': curing_shortfall * 10.0, 'QC non-compliance': qc_shortfall * 50.0}
-    max_penalty = max(penalties, key=penalties.get)
-    
-    if penalties[max_penalty] > 0:
-        return max_penalty
-    else:
-        return 'Poor curing'  # default fallback
+    # Count of similar elements is lower
+    similar_elems = 8 if (i % 2 == 0) else 12
 
-# Apply row-level target columns
-defect_occurred_vals = []
-defect_type_vals = []
-severity_vals = []
-root_cause_vals = []
-label_source_vals = []
+    row = {
+        'concrete_grade': 'M30 SCC',
+        'water_cement_ratio_design': 0.439,
+        'water_cement_ratio_actual': 0.439,  # Perfect W/C ratio (no deviation)
+        'cement_type': 'OPC 53 + GGBS blend (30% replacement)',
+        'admixture_type': 'Euclid Plastol Ultraflow 4001 / Supaflo PC 555 / Auramix 300 plus',
+        'target_slump_mm': 650,
+        'max_aggregate_size_mm': 12.5,
+        'planned_pour_month': 'June',
+        'curing_method': curing_meth,
+        'planned_curing_duration_days': plan_curing,
+        'actual_curing_duration_days': 14,  # Fully cured (compliant)
+        'spec_min_curing_days': 10,
+        'wc_ratio_tolerance_spec': 0.02,
+        'pre_pour_checklist_signed_off_ratio': 0.95,  # High checklist sign-off (fully compliant)
+        'shrinkage_risk_season': 'Low',
+        'wind_exposure_category': wind,
+        'site_environment': 'Urban high-rise residential development (multi-tower)',
+        'accessibility': access,
+        'city': 'Bengaluru',
+        'project_tier': 'Tier 1',
+        'count_similar_elements': similar_elems,
+        'defect_image': img,
+        
+        # Metadata / ID
+        'defect_id': f"NDEF-T3F26-{i+1:03d}",
+        'site_id': 'SW-T3',
+        'project_name': 'Tower 3 Floor 26',
+        'defect_super_category': 'No Defect',
+        'defect_category': 'No Defect',
+        'element_type': get_element_type(curing_meth),
+        'floor_level': 'Floor 26',
+        'mix_recipe_code': 'M30_SCC_RECIPE',
+        'mix_design_source': 'T3_F26_MIX_DESIGN.xlsx',
+        'workability_test_type': 'Slump flow (SCC)',
+        'label_source': 'inferred_no_defect',
+        
+        # Targets
+        'defect_occurred': 0,
+        'defect_type': 'No Defect',
+        'severity': 'No Defect',
+        'root_cause': 'No Defect'
+    }
+    neg_rows.append(row)
 
-for idx, row in df.iterrows():
-    if idx in top_20_indices:
-        # Convert to negative sample (No Defect)
-        defect_occurred_vals.append(0)
-        defect_type_vals.append('No Defect')
-        severity_vals.append('No Defect')
-        root_cause_vals.append('No Defect')
-        label_source_vals.append('inferred_no_defect')
-    else:
-        # Confirmed defect
-        defect_occurred_vals.append(1)
-        defect_type_vals.append(get_defect_type(row))
-        severity_vals.append(get_severity(row))
-        root_cause_vals.append(get_root_cause(row))
-        label_source_vals.append('confirmed_defect')
+df_neg = pd.DataFrame(neg_rows)
 
-df['defect_occurred'] = defect_occurred_vals
-df['defect_type'] = defect_type_vals
-df['severity'] = severity_vals
-df['root_cause'] = root_cause_vals
-df['label_source'] = label_source_vals
-
-# Clean up helper columns
-df = df.drop(columns=['checklist_filled', 'actual_curing_filled', 'actual_wc_filled', 'design_wc_filled', 
-                      'checklist_score', 'curing_score', 'wc_score', 'quality_score'])
+# Concatenate positive and negative datasets
+df_combined = pd.concat([df_pos, df_neg], ignore_index=True)
+print(f"Combined dataset shape: {df_combined.shape}")
 
 # Save row-level processed dataset
-df.to_csv(row_level_path, index=False)
-print(f"Row-level dataset saved to {row_level_path}")
+row_level_path = os.path.join(workspace_dir, "L&T_defect_dataset_processed_row.csv")
+df_combined.to_csv(row_level_path, index=False)
+print(f"Row-level dataset saved to: {row_level_path}")
 
-# --- STEP 3: GROUP BY UNIQUE IMAGES ---
+# --- GROUP BY UNIQUE IMAGES (COMPATIBILITY STEP) ---
 def get_images(img_str):
     if pd.isna(img_str):
         return []
@@ -141,7 +164,7 @@ def get_images(img_str):
 
 # Expand dataset to single-image rows
 expanded_rows = []
-for idx, row in df.iterrows():
+for idx, row in df_combined.iterrows():
     imgs = get_images(row['defect_image'])
     for img in imgs:
         expanded_row = row.copy()
@@ -157,18 +180,14 @@ for img in unique_images:
     sub_df = expanded_df[expanded_df['single_image'] == img]
     base_row = sub_df.iloc[0].copy()
     
-    # Update image name
     base_row['defect_image'] = img
     
-    # 1. defect_occurred logic: if ANY row has defect_occurred = 1, then the image has a defect
     has_defect = (sub_df['defect_occurred'] == 1).any()
     base_row['defect_occurred'] = 1 if has_defect else 0
     base_row['label_source'] = 'confirmed_defect' if has_defect else 'inferred_no_defect'
     
-    # 2. defect_id
     base_row['defect_id'] = "; ".join(sub_df['defect_id'].unique())
     
-    # 3. categories and super categories (ignore 'No Defect' / nulls if there is a real defect)
     if has_defect:
         def_sub_df = sub_df[sub_df['defect_occurred'] == 1]
         base_row['defect_super_category'] = "; ".join(def_sub_df['defect_super_category'].unique())
@@ -183,8 +202,7 @@ for img in unique_images:
         base_row['severity'] = 'No Defect'
         base_row['root_cause'] = 'No Defect'
         
-    # For feature columns, join values with semicolon if they differ
-    for col in df.columns:
+    for col in df_combined.columns:
         if col not in ['defect_id', 'defect_super_category', 'defect_category', 'defect_image', 'defect_occurred', 'defect_type', 'severity', 'root_cause', 'label_source']:
             unique_vals = sub_df[col].dropna().unique()
             if len(unique_vals) > 1:
@@ -201,7 +219,8 @@ for img in unique_images:
 grouped_df = pd.DataFrame(grouped_records)
 
 # Save grouped dataset
+grouped_path = os.path.join(workspace_dir, "L&T_defect_dataset_processed_grouped.csv")
 grouped_df.to_csv(grouped_path, index=False)
-print(f"Grouped dataset saved to {grouped_path}")
+print(f"Grouped dataset saved to: {grouped_path}")
 
-print("Preprocessing successfully updated with Root Cause and Severity mappings!")
+print("Preprocessing successfully updated with the new Crack Intelligence dataset!")

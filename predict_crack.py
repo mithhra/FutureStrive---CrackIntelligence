@@ -130,3 +130,37 @@ good_practice_input = {
 result_2 = predict_element_crack_risk(good_practice_input)
 for k, v in result_2.items():
     print(f"{k.replace('_', ' ').title()}: {v}")
+
+# --- Run Demonstration on Sample Case 3: Real Dataset High Risk ---
+print("\n==========================================================")
+print("TEST CASE 3: Real Dataset High Risk (High Wind & Restricted)")
+print("==========================================================")
+real_high_risk_input = {
+    'concrete_grade': 'M30 SCC',
+    'water_cement_ratio_design': 0.439,
+    'water_cement_ratio_actual': 0.455,
+    'cement_type': 'OPC 53 + GGBS blend (30% replacement)',
+    'admixture_type': 'Euclid Plastol Ultraflow 4001 / Supaflo PC 555 / Auramix 300 plus',
+    'target_slump_mm': 650,
+    'workability_test_type': 'Slump flow (SCC)',
+    'max_aggregate_size_mm': 12.5,
+    'planned_pour_month': 'June',
+    'curing_method': 'Water sprinkling + curing compound (vertical face)',
+    'planned_curing_duration_days': 10,
+    'actual_curing_duration_days': 7,
+    'spec_min_curing_days': 10,
+    'wc_ratio_tolerance_spec': 0.02,
+    'pre_pour_checklist_signed_off_ratio': 0.72,
+    'shrinkage_risk_season': 'Low',
+    'wind_exposure_category': 'High',
+    'site_environment': 'Urban high-rise residential development (multi-tower)',
+    'accessibility': 'Restricted (balcony edge; fall-protection required)',
+    'city': 'Bengaluru',
+    'project_tier': 'Tier 1',
+    'count_similar_elements': 18
+}
+
+result_3 = predict_element_crack_risk(real_high_risk_input)
+for k, v in result_3.items():
+    print(f"{k.replace('_', ' ').title()}: {v}")
+
