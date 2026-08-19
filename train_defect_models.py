@@ -20,7 +20,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 from xgboost import XGBClassifier, XGBRegressor
 
-PROJECT_DIR = r"d:\FutureStrive\crack_pred_with real dataset"
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV = os.path.join(PROJECT_DIR, "synthetic_defect_dataset.csv")
 df  = pd.read_csv(CSV)
 print(f"Loaded {CSV}  shape={df.shape}")
