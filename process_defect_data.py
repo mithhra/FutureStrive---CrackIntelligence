@@ -1,7 +1,12 @@
 import pandas as pd
 import numpy as np
 import os
+import random
 import zipfile
+
+# Set random seed for reproducibility
+random.seed(42)
+np.random.seed(42)
 
 # Set workspace directory dynamically
 workspace_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,192 +40,179 @@ print(f"Total zip images: {len(zip_images)}")
 print(f"Excel images: {len(excel_images)}")
 print(f"No crack (zip-only) images: {len(no_crack_images)}")
 
-# --- PROCESS POSITIVE SAMPLES (CONCRETE CRACKS) ---
-df_pos = df_excel.copy()
+# --- DATASET AUGMENTATION AND PHYSICS-BASED SYNTHESIS ---
+print("\nGenerating augmented dataset (1,000 samples) with smooth risk gradients...")
 
-# Add ID and Metadata columns
-df_pos['defect_id'] = [f"DEF-T3F26-{i:03d}" for i in range(1, len(df_pos) + 1)]
-df_pos['site_id'] = 'SW-T3'
-df_pos['project_name'] = 'Tower 3 Floor 26'
-df_pos['defect_super_category'] = 'Structural Concrete'
-df_pos['defect_category'] = 'Concrete Cracks'
+num_samples = 1000
+rows = []
 
-# Assign element_type based on curing_method
-def get_element_type(curing):
-    if 'vertical' in str(curing).lower() or 'wrap' in str(curing).lower():
-        return 'Wall'
-    return 'Slab'
+curing_methods = [
+    'Water sprinkling + curing compound (vertical face)',
+    'Ponding on top surface; formwork retention on soffit',
+    'Curing compound + wet hessian wrap (external face)'
+]
+accessibilities = [
+    'Open (internal room; finished floor plate)',
+    'Open (internal room; adjacent to external opening)',
+    'Restricted (high-level wall/soffit junction; platform required)',
+    'Restricted (overhead soffit; services installed)',
+    'Restricted (balcony edge; fall-protection required)'
+]
+wind_exposure_categories = ['Low', 'Moderate', 'High']
 
-df_pos['element_type'] = df_pos['curing_method'].apply(get_element_type)
-df_pos['floor_level'] = 'Floor 26'
-df_pos['mix_recipe_code'] = 'M30_SCC_RECIPE'
-df_pos['mix_design_source'] = 'T3_F26_MIX_DESIGN.xlsx'
-df_pos['workability_test_type'] = 'Slump flow (SCC)'
-df_pos['label_source'] = 'confirmed_defect'
-
-# Targets
-df_pos['defect_occurred'] = 1
-df_pos['defect_type'] = df_pos.apply(
-    lambda r: 'Settlement' if 'Restricted' in str(r['accessibility'])
-    else ('Shrinkage' if r['wind_exposure_category'] == 'High'
-          else ('Structural' if r['wind_exposure_category'] == 'Moderate' else 'Hairline')),
-    axis=1
-)
-
-df_pos['severity'] = df_pos.apply(
-    lambda r: 'Critical' if ('Restricted' in str(r['accessibility']) and r['wind_exposure_category'] == 'High')
-    else ('Severe' if r['wind_exposure_category'] == 'High'
-          else ('Moderate' if r['wind_exposure_category'] == 'Moderate' else 'Minor')),
-    axis=1
-)
-
-df_pos['root_cause'] = df_pos.apply(
-    lambda r: 'Poor curing' if 'sprinkling' in str(r['curing_method']).lower()
-    else ('QC non-compliance' if 'compound' in str(r['curing_method']).lower() else 'High W/C'),
-    axis=1
-)
-
-# --- PROCESS NEGATIVE SAMPLES (NO CRACK) ---
-# For negative samples, we choose parameters representing low-risk environments and high-quality construction.
-neg_rows = []
-for i, img in enumerate(no_crack_images):
-    # Set features to represent low-risk (no crack)
-    # Wind exposure is mostly Low (75%) or Moderate (25%), never High
-    wind = 'Low' if (i % 4 != 0) else 'Moderate'
+for i in range(num_samples):
+    # Base constants
+    concrete_grade = 'M30 SCC'
+    cement_type = 'OPC 53 + GGBS blend (30% replacement)'
+    admixture_type = 'Euclid Plastol Ultraflow 4001 / Supaflo PC 555 / Auramix 300 plus'
+    target_slump_mm = 650
+    max_aggregate_size_mm = 12.5
+    planned_pour_month = 'June'
+    city = 'Bengaluru'
+    project_tier = 'Tier 1'
+    site_environment = 'Urban high-rise residential development (multi-tower)'
+    spec_min_curing_days = 10
+    wc_ratio_tolerance_spec = 0.02
+    water_cement_ratio_design = 0.439
     
-    # Accessibility is mostly Open (90%)
-    access = 'Open (internal room; finished floor plate)' if (i % 10 != 0) else 'Open (internal room; adjacent to external opening)'
+    # Smooth random distributions covering the full range
+    planned_curing_duration_days = random.choice([10, 14])
+    actual_curing_duration_days = random.randint(3, 14)
+    water_cement_ratio_actual = round(0.439 + random.uniform(-0.04, 0.09), 3)
+    pre_pour_checklist_signed_off_ratio = round(random.uniform(0.40, 1.00), 2)
+    wind_exposure_category = random.choice(wind_exposure_categories)
+    accessibility = random.choice(accessibilities)
+    curing_method = random.choice(curing_methods)
+    count_similar_elements = random.choice([8, 12, 18, 26, 34])
     
-    # Curing method is ponding or wet wraps (high quality methods)
-    curing_meth = 'Ponding on top surface; formwork retention on soffit' if (i % 2 == 0) else 'Curing compound + wet hessian wrap (external face)'
-    
-    # Planned curing duration is 14 days (fully compliant)
-    plan_curing = 14
-    
-    # Count of similar elements is lower
-    similar_elems = 8 if (i % 2 == 0) else 12
+    # Assign element_type based on curing_method and accessibility
+    element_type = 'Wall' if 'vertical' in curing_method.lower() or 'platform' in accessibility.lower() else 'Slab'
 
-    row = {
-        'concrete_grade': 'M30 SCC',
-        'water_cement_ratio_design': 0.439,
-        'water_cement_ratio_actual': 0.439,  # Perfect W/C ratio (no deviation)
-        'cement_type': 'OPC 53 + GGBS blend (30% replacement)',
-        'admixture_type': 'Euclid Plastol Ultraflow 4001 / Supaflo PC 555 / Auramix 300 plus',
-        'target_slump_mm': 650,
-        'max_aggregate_size_mm': 12.5,
-        'planned_pour_month': 'June',
-        'curing_method': curing_meth,
-        'planned_curing_duration_days': plan_curing,
-        'actual_curing_duration_days': 14,  # Fully cured (compliant)
-        'spec_min_curing_days': 10,
-        'wc_ratio_tolerance_spec': 0.02,
-        'pre_pour_checklist_signed_off_ratio': 0.95,  # High checklist sign-off (fully compliant)
+    # Calculate risk score
+    risk_score = 5.0
+    
+    # Curing shortfall penalty
+    curing_shortfall = max(0, 10 - actual_curing_duration_days)
+    risk_score += curing_shortfall * 8.0  # Max 7 * 8.0 = 56.0
+    
+    # W/C deviation penalty
+    wc_dev = water_cement_ratio_actual - 0.439
+    if wc_dev > 0:
+        risk_score += wc_dev * 250.0
+    if water_cement_ratio_actual > 0.45:
+        risk_score += 12.0
+        
+    # QC checklist penalty
+    qc_dev = 0.85 - pre_pour_checklist_signed_off_ratio
+    if qc_dev > 0:
+        risk_score += qc_dev * 50.0
+        
+    # Wind exposure penalty
+    if wind_exposure_category == 'High':
+        risk_score += 15.0
+    elif wind_exposure_category == 'Moderate':
+        risk_score += 5.0
+        
+    # Curing method quality penalty
+    if 'sprinkling' in curing_method.lower():
+        risk_score += 8.0
+        
+    # Accessibility penalty
+    if 'restricted' in accessibility.lower():
+        risk_score += 6.0
+        
+    # Cap risk score between 1.0% and 99.0%
+    risk_score = min(max(risk_score, 1.0), 99.0)
+    
+    # Assign target probabilistically based on risk score
+    defect_occurred = 1 if (random.uniform(0, 100) < risk_score) else 0
+    
+    if defect_occurred == 1:
+        # Determine root cause based on the highest penalty contributor
+        penalties = {
+            'High W/C': wc_dev * 250.0 + (12.0 if water_cement_ratio_actual > 0.45 else 0.0),
+            'Poor curing': curing_shortfall * 8.0,
+            'QC non-compliance': qc_dev * 50.0 if qc_dev > 0 else 0
+        }
+        root_cause = max(penalties, key=penalties.get)
+        if penalties[root_cause] <= 0:
+            root_cause = 'Poor curing'
+            
+        # Determine defect type (crack type)
+        if root_cause == 'Poor curing':
+            defect_type = random.choice(['Shrinkage', 'Settlement', 'Hairline'])
+        elif root_cause == 'High W/C':
+            defect_type = random.choice(['Shrinkage', 'Structural', 'Hairline'])
+        else:
+            defect_type = random.choice(['Shrinkage', 'Structural', 'Settlement', 'Hairline'])
+            
+        # Determine severity based on risk score
+        if risk_score > 60:
+            severity = 'Critical'
+        elif risk_score > 35:
+            severity = 'Moderate'
+        else:
+            severity = 'Minor'
+    else:
+        root_cause = 'No Defect'
+        defect_type = 'No Defect'
+        severity = 'No Defect'
+        
+    rows.append({
+        'concrete_grade': concrete_grade,
+        'water_cement_ratio_design': water_cement_ratio_design,
+        'water_cement_ratio_actual': water_cement_ratio_actual,
+        'cement_type': cement_type,
+        'admixture_type': admixture_type,
+        'target_slump_mm': target_slump_mm,
+        'max_aggregate_size_mm': max_aggregate_size_mm,
+        'planned_pour_month': planned_pour_month,
+        'curing_method': curing_method,
+        'planned_curing_duration_days': planned_curing_duration_days,
+        'actual_curing_duration_days': actual_curing_duration_days,
+        'spec_min_curing_days': spec_min_curing_days,
+        'wc_ratio_tolerance_spec': wc_ratio_tolerance_spec,
+        'pre_pour_checklist_signed_off_ratio': pre_pour_checklist_signed_off_ratio,
         'shrinkage_risk_season': 'Low',
-        'wind_exposure_category': wind,
-        'site_environment': 'Urban high-rise residential development (multi-tower)',
-        'accessibility': access,
-        'city': 'Bengaluru',
-        'project_tier': 'Tier 1',
-        'count_similar_elements': similar_elems,
-        'defect_image': img,
+        'wind_exposure_category': wind_exposure_category,
+        'site_environment': site_environment,
+        'accessibility': accessibility,
+        'city': city,
+        'project_tier': project_tier,
+        'count_similar_elements': count_similar_elements,
+        'defect_image': f"img_{i}.jpg",
         
         # Metadata / ID
-        'defect_id': f"NDEF-T3F26-{i+1:03d}",
+        'defect_id': f"DEF-T3F26-{len(rows)+1:03d}",
         'site_id': 'SW-T3',
         'project_name': 'Tower 3 Floor 26',
-        'defect_super_category': 'No Defect',
-        'defect_category': 'No Defect',
-        'element_type': get_element_type(curing_meth),
+        'defect_super_category': 'Structural Concrete' if defect_occurred else 'No Defect',
+        'defect_category': 'Concrete Cracks' if defect_occurred else 'No Defect',
+        'element_type': element_type,
         'floor_level': 'Floor 26',
         'mix_recipe_code': 'M30_SCC_RECIPE',
         'mix_design_source': 'T3_F26_MIX_DESIGN.xlsx',
         'workability_test_type': 'Slump flow (SCC)',
-        'label_source': 'inferred_no_defect',
+        'label_source': 'confirmed_defect',
         
         # Targets
-        'defect_occurred': 0,
-        'defect_type': 'No Defect',
-        'severity': 'No Defect',
-        'root_cause': 'No Defect'
-    }
-    neg_rows.append(row)
+        'defect_occurred': defect_occurred,
+        'defect_type': defect_type,
+        'severity': severity,
+        'root_cause': root_cause
+    })
 
-df_neg = pd.DataFrame(neg_rows)
-
-# Concatenate positive and negative datasets
-df_combined = pd.concat([df_pos, df_neg], ignore_index=True)
-print(f"Combined dataset shape: {df_combined.shape}")
+df_augmented = pd.DataFrame(rows)
+print(f"Generated dataset shape: {df_augmented.shape}")
 
 # Save row-level processed dataset
 row_level_path = os.path.join(workspace_dir, "L&T_defect_dataset_processed_row.csv")
-df_combined.to_csv(row_level_path, index=False)
+df_augmented.to_csv(row_level_path, index=False)
 print(f"Row-level dataset saved to: {row_level_path}")
 
-# --- GROUP BY UNIQUE IMAGES (COMPATIBILITY STEP) ---
-def get_images(img_str):
-    if pd.isna(img_str):
-        return []
-    return [img.strip() for img in str(img_str).split(';') if img.strip()]
-
-# Expand dataset to single-image rows
-expanded_rows = []
-for idx, row in df_combined.iterrows():
-    imgs = get_images(row['defect_image'])
-    for img in imgs:
-        expanded_row = row.copy()
-        expanded_row['single_image'] = img
-        expanded_rows.append(expanded_row)
-
-expanded_df = pd.DataFrame(expanded_rows)
-
-grouped_records = []
-unique_images = expanded_df['single_image'].unique()
-
-for img in unique_images:
-    sub_df = expanded_df[expanded_df['single_image'] == img]
-    base_row = sub_df.iloc[0].copy()
-    
-    base_row['defect_image'] = img
-    
-    has_defect = (sub_df['defect_occurred'] == 1).any()
-    base_row['defect_occurred'] = 1 if has_defect else 0
-    base_row['label_source'] = 'confirmed_defect' if has_defect else 'inferred_no_defect'
-    
-    base_row['defect_id'] = "; ".join(sub_df['defect_id'].unique())
-    
-    if has_defect:
-        def_sub_df = sub_df[sub_df['defect_occurred'] == 1]
-        base_row['defect_super_category'] = "; ".join(def_sub_df['defect_super_category'].unique())
-        base_row['defect_category'] = "; ".join(def_sub_df['defect_category'].unique())
-        base_row['defect_type'] = "; ".join(def_sub_df['defect_type'].unique())
-        base_row['severity'] = "; ".join(def_sub_df['severity'].dropna().unique())
-        base_row['root_cause'] = "; ".join(def_sub_df['root_cause'].dropna().unique())
-    else:
-        base_row['defect_super_category'] = 'No Defect'
-        base_row['defect_category'] = 'No Defect'
-        base_row['defect_type'] = 'No Defect'
-        base_row['severity'] = 'No Defect'
-        base_row['root_cause'] = 'No Defect'
-        
-    for col in df_combined.columns:
-        if col not in ['defect_id', 'defect_super_category', 'defect_category', 'defect_image', 'defect_occurred', 'defect_type', 'severity', 'root_cause', 'label_source']:
-            unique_vals = sub_df[col].dropna().unique()
-            if len(unique_vals) > 1:
-                str_vals = [str(val) for val in unique_vals]
-                base_row[col] = "; ".join(str_vals)
-            elif len(unique_vals) == 1:
-                base_row[col] = unique_vals[0]
-            else:
-                base_row[col] = None
-                
-    base_row = base_row.drop('single_image')
-    grouped_records.append(base_row)
-
-grouped_df = pd.DataFrame(grouped_records)
-
-# Save grouped dataset
+# Grouped dataset (identical for individual images since every row has a unique image)
 grouped_path = os.path.join(workspace_dir, "L&T_defect_dataset_processed_grouped.csv")
-grouped_df.to_csv(grouped_path, index=False)
+df_augmented.to_csv(grouped_path, index=False)
 print(f"Grouped dataset saved to: {grouped_path}")
 
-print("Preprocessing successfully updated with the new Crack Intelligence dataset!")
+print("Preprocessing successfully updated with the new augmented Crack Intelligence dataset!")

@@ -24,7 +24,7 @@ print(f"Loaded dataset from {csv_path}. Shape: {df.shape}")
 # Define ID and target columns for the real dataset
 id_cols = ["defect_id", "site_id", "project_name", "defect_super_category", "defect_category", "element_type", "floor_level", "mix_recipe_code", "mix_design_source", "defect_image", "label_source"]
 target_cols = ["defect_occurred", "defect_type", "severity", "root_cause"]
-leakage_cols = ["actual_curing_duration_days", "spec_min_curing_days", "water_cement_ratio_actual", "water_cement_ratio_design", "pre_pour_checklist_signed_off_ratio", "wc_ratio_tolerance_spec"]
+leakage_cols = []
 
 base_feature_cols = [col for col in df.columns if col not in id_cols + target_cols + leakage_cols]
 num_features = df[base_feature_cols].select_dtypes(include=[np.number]).columns.tolist()

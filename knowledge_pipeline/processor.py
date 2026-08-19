@@ -22,8 +22,8 @@ from pathlib import Path
 try:
     import fitz  # PyMuPDF
 except ImportError:
-    print("ERROR: PyMuPDF not installed. Run: pip install pymupdf")
-    sys.exit(1)
+    print("WARNING: PyMuPDF not installed. PDF extraction will be skipped. Run: pip install pymupdf")
+
 
 BASE_DIR   = Path(__file__).resolve().parent.parent
 KB_DIR     = BASE_DIR / "knowledge_base"
